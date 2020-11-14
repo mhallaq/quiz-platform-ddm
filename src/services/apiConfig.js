@@ -1,9 +1,11 @@
 import axios from 'axios'
 
+const URL = "https://jservice.io/api/"
 
-const BASE_URL = "https://jservice.io/api/"
-const CATEGORIES_URL = BASE_URL + "categories?count=6&offset=" + Math.random() * 1000
-let CLUES_URL = BASE_URL + "clues?category="
+const CATEGORIES_URL = URL + "categories?count=6&offset=" + Math.random() * 1000
+const CLUES_URL = URL + "clues?category="
+const RAND_URL = URL + "random"
+
 
 
 export const fetchCategories = async () => {
@@ -24,3 +26,11 @@ export const fetchClues = async (category_id) => {
     }
 }
 
+export const fetchRand = async () => {
+    try {
+        const response = await axios.get(RAND_URL)
+        return response.data
+    } catch (error) {
+        throw error
+    }
+}
