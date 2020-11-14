@@ -7,8 +7,6 @@ function App() {
 
   useEffect(() => createBoard(setBoard), [])
 
-
-
   return (
     <div className="App">
       <h1>Quiz Platform</h1>
