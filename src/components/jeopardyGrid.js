@@ -34,33 +34,32 @@ export default function JeopardyGrid(props) {
     {title:'category 6'},])
 
   React.useEffect(() => { if (props.board.categories.length===6) setCategories(props.board.categories)},[props.board.categories])
-  const columns = categories.map((column, index) => {
-    return (
-      <Grid key={index} xs={2} container direction="column" item>
-        <Box className={classes.item}>
-          <h2>{column.title}</h2>
-        </Box>
-        <Box className={classes.item} onClick={() => props.itemClick(index, 0)}>
-          <h2>$200</h2>
-        </Box>
-        <Box className={classes.item} onClick={() => props.itemClick(index, 1)}>
-          <h2>$400</h2>
-        </Box>
-        <Box className={classes.item} onClick={() => props.itemClick(index, 2)}>
-          <h2>$600</h2>
-        </Box>
-        <Box className={classes.item} onClick={() => props.itemClick(index, 3)}>
-          <h2>$800</h2>
-        </Box>
-        <Box className={classes.item} onClick={() => props.itemClick(index, 4)}>
-          <h2>$1000</h2>
-        </Box>
-      </Grid>)
-  })
 
   return (
     <Grid container direction="row" className={classes.main} >
-      {columns}
+      {categories.map((column, index) => {
+        return (
+          <Grid key={index} xs={2} container direction="column" item>
+            <Box className={classes.item}>
+              <h2>{column.title}</h2>
+            </Box>
+            <Box className={classes.item} onClick={() => props.itemClick(index, 0)}>
+              <h2>$200</h2>
+            </Box>
+            <Box className={classes.item} onClick={() => props.itemClick(index, 1)}>
+              <h2>$400</h2>
+            </Box>
+            <Box className={classes.item} onClick={() => props.itemClick(index, 2)}>
+              <h2>$600</h2>
+            </Box>
+            <Box className={classes.item} onClick={() => props.itemClick(index, 3)}>
+              <h2>$800</h2>
+            </Box>
+            <Box className={classes.item} onClick={() => props.itemClick(index, 4)}>
+              <h2>$1000</h2>
+            </Box>
+          </Grid>)
+      })}
     </Grid>
   )
 }
