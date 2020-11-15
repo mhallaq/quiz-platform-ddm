@@ -25,40 +25,42 @@ const useStyles = makeStyles( theme => ({
 
 export default function JeopardyGrid(props) {
   const classes = useStyles();
-  const [categories, setCategories] = React.useState([{ title: 'category 1' },
-  { title: 'category 2' },
-  { title: 'category 3' },
-  { title: 'category 4' },
-    { title: 'category 5' }, {title:'category 6'},])
+  const [categories, setCategories] = React.useState([
+    { title: 'category 1' },
+    { title: 'category 2' },
+    { title: 'category 3' },
+    { title: 'category 4' },
+    { title: 'category 5' },
+    {title:'category 6'},])
 
-  React.useEffect(() => { setCategories(props.board.categories)},[props.board.categories])
-  React.useEffect(() => console.log(categories))
+  React.useEffect(() => { if (props.board.categories.length===6) setCategories(props.board.categories)},[props.board.categories])
+  const columns = categories.map((column, index) => {
+    return (
+      <Grid key={index} xs={2} container direction="column" item>
+        <Box className={classes.item}>
+          <h2>{column.title}</h2>
+        </Box>
+        <Box className={classes.item} onClick={() => props.itemClick(index, 0)}>
+          <h2>$200</h2>
+        </Box>
+        <Box className={classes.item} onClick={() => props.itemClick(index, 1)}>
+          <h2>$400</h2>
+        </Box>
+        <Box className={classes.item} onClick={() => props.itemClick(index, 2)}>
+          <h2>$600</h2>
+        </Box>
+        <Box className={classes.item} onClick={() => props.itemClick(index, 3)}>
+          <h2>$800</h2>
+        </Box>
+        <Box className={classes.item} onClick={() => props.itemClick(index, 4)}>
+          <h2>$1000</h2>
+        </Box>
+      </Grid>)
+  })
 
   return (
     <Grid container direction="row" className={classes.main} >
-      {categories.map((column,index) => {
-        return (
-        <Grid key={index} xs={2} container direction="column" item>
-          <Box className={classes.item}>
-              <h2>{column.title}</h2>
-          </Box>
-          <Box className={classes.item} onClick={()=> props.itemClick(index,0)}>
-              <h2>$200</h2>
-          </Box>
-            <Box className={classes.item} onClick={() => props.itemClick(index,1)}>
-              <h2>$400</h2>
-          </Box>
-            <Box className={classes.item} onClick={() => props.itemClick(index, 2)}>
-              <h2>$600</h2>
-          </Box>
-            <Box className={classes.item} onClick={() => props.itemClick(index, 3)}>
-              <h2>$800</h2>
-          </Box>
-            <Box className={classes.item} onClick={() => props.itemClick(index, 4)}>
-              <h2>$1000</h2>
-          </Box>
-        </Grid>)
-      })}
+      {columns}
     </Grid>
   )
 }
