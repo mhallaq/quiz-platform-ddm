@@ -11,20 +11,17 @@ function App() {
   const [row, setRow] = useState()
 
   useEffect(() => createBoard(setBoard), [])
-  //useEffect(() => setView('grid'), [setBoard])
 
   const itemClick = (column, row) => {
-    console.log('item clicked: column', column, 'index', row)
     setColumn(column)
     setRow(row)
     setView('question')
   }
 
   const renderMain = () => {
-    if (view ==='grid' && Boolean(board)){
+    if (view ==='grid'){
       return(
         <>
-
           <JeopardyGrid
             board={board}
             itemClick={itemClick} />
@@ -33,15 +30,15 @@ function App() {
     } else if (view ==='question'){
       return (
         <>
-
-        <QuestionCard
-          question = {board.categories[column].clues[row]}
-          setView={setView}
-          />
+          <QuestionCard
+            question = {board.categories[column].clues[row]}
+            setView={setView}
+            />
         </>
       )
     }
   }
+
   return (
     <div className="App">
       <h1>Quiz Platform</h1>
