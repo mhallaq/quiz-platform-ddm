@@ -18,7 +18,7 @@ const createBoard = (async (setBoard) => {
             clues
         })
     })
-    setBoard({ categories })
+    setBoard(categories)
 })
 
 export default createBoard

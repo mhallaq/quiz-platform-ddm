@@ -33,7 +33,9 @@ export default function JeopardyGrid(props) {
     { title: 'category 5' },
     {title:'category 6'},])
 
-  React.useEffect(() => { if (props.board.categories.length===6) setCategories(props.board.categories)},[props.board.categories])
+  React.useEffect(() => {
+    console.log(props.board)
+    if (props.board.length === 6 ){ setCategories(props.board)}},[props.board])
 
   return (
     <Grid container direction="row" className={classes.main} >

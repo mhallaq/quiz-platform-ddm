@@ -5,7 +5,7 @@ import createBoard from './services/createBoard'
 import QuestionCard from './components/questionCard'
 
 function App() {
-  const [board, setBoard] = useState()
+  const [board, setBoard] = useState([])
   const [view, setView] = useState('grid')
   const [column, setColumn]= useState()
   const [row, setRow] = useState()
@@ -31,7 +31,7 @@ function App() {
       return (
         <>
           <QuestionCard
-            question = {board.categories[column].clues[row]}
+            question = {board[column].clues[row]}
             setView={setView}
             />
         </>
