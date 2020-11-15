@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function QuestionCard(props) {
   const classes = useStyles();
-  //console.log('question:',props.question)
+
   return (
     <Box className={classes.main} onClick={()=>props.setView('grid')}>
       <Box className={`${classes.question} ${classes.main}`} >

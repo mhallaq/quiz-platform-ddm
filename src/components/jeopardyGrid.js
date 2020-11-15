@@ -1,43 +1,32 @@
-import React from 'react';
-// import Container from '@material-ui/core/Container';
-import {Box, Grid} from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
   main: {
     border: '2px solid black',
     flexGrow: 1,
-    minHeight:"500px"
-},
+    minHeight: "500px"
+  },
   item: {
     border: '2px solid black',
     fontWeight: 'bold',
     height: "150px",
     alignItems: 'center',
     justifyContent: "center",
-    display:"flex",
-    backgroundColor:"#060CE9",
+    display: "flex",
+    backgroundColor: "#060CE9",
     color: '#FFFFFF',
-     "-webkit-text-stroke": '1px black',
+    "-webkit-text-stroke": '1px black',
   }
-
 }))
 
 export default function JeopardyGrid(props) {
+  const { board } = props || []
   const classes = useStyles();
-  const [categories, setCategories] = React.useState([
-    { title: 'category 1' },
-    { title: 'category 2' },
-    { title: 'category 3' },
-    { title: 'category 4' },
-    { title: 'category 5' },
-    {title:'category 6'},])
-
-  React.useEffect(() => { if (props.board.categories.length===6) setCategories(props.board.categories)},[props.board.categories])
 
   return (
     <Grid container direction="row" className={classes.main} >
-      {categories.map((column, index) => {
+      {board && board.map((column, index) => {
         return (
           <Grid key={index} xs={2} container direction="column" item>
             <Box className={classes.item}>

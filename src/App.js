@@ -7,36 +7,24 @@ import QuestionCard from './components/questionCard'
 function App() {
   const [board, setBoard] = useState()
   const [view, setView] = useState('grid')
-  const [column, setColumn]= useState()
+  const [col, setColumn]= useState()
   const [row, setRow] = useState()
 
   useEffect(() => createBoard(setBoard), [])
 
-  const itemClick = (column, row) => {
-    setColumn(column)
+  const itemClick = (col, row) => {
+    setColumn(col)
     setRow(row)
     setView('question')
   }
 
   const renderMain = () => {
-    if (view ==='grid'){
-      return(
-        <>
-          <JeopardyGrid
-            board={board}
-            itemClick={itemClick} />
-        </>
-      )
-    } else if (view ==='question'){
-      return (
-        <>
-          <QuestionCard
-            question = {board.categories[column].clues[row]}
-            setView={setView}
-            />
-        </>
-      )
-    }
+    if (view ==='grid') return (
+      <JeopardyGrid board={board} itemClick={itemClick} />
+    )
+    if (view ==='question') return (
+      <QuestionCard question = {board[col].clues[row]} setView={setView}/>
+    )
   }
 
   return (
