@@ -7,6 +7,7 @@ const useStyles = makeStyles( theme => ({
   main: {
     border: '2px solid black',
     flexGrow: 1,
+    minHeight:"500px"
 },
   item: {
     border: '2px solid black',
@@ -24,13 +25,18 @@ const useStyles = makeStyles( theme => ({
 
 export default function JeopardyGrid(props) {
   const classes = useStyles();
-  //const [categories, setCategories] = React.useState()
-  //const categories =  ['category 1', 'category 2', 'category 3', 'category 4', 'category 5', 'category 6',]
-  //React.useEffect(() => {console.log(props.board); setCategories(props.board)},[props.board])
+  const [categories, setCategories] = React.useState([{ title: 'category 1' },
+  { title: 'category 2' },
+  { title: 'category 3' },
+  { title: 'category 4' },
+    { title: 'category 5' }, {title:'category 6'},])
+
+  React.useEffect(() => { setCategories(props.board.categories)},[props.board.categories])
+  React.useEffect(() => console.log(categories))
 
   return (
     <Grid container direction="row" className={classes.main} >
-      {props.board.categories && props.board.categories.map((column,index) => {
+      {categories.map((column,index) => {
         return (
         <Grid key={index} xs={2} container direction="column" item>
           <Box className={classes.item}>
