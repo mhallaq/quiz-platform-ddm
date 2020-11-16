@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   main: {
+    fontFamily: 'KorinnaBold',
     alignItems: 'center',
     justifyContent: "center",
     display: "flex",
@@ -12,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "#060CE9",
     color: '#FFFFFF',
     "-webkit-text-stroke": '1px black',
-    fontWeight: 'bold',
+    fontWeight: '900',
   },
   question:{
     height: '70vh',
@@ -28,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function QuestionCard(props) {
   const classes = useStyles();
-  //console.log('question:',props.question)
+
   return (
     <Box className={classes.main} onClick={()=>props.setView('grid')}>
       <Box className={`${classes.question} ${classes.main}`} >

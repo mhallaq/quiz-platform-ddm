@@ -4,6 +4,7 @@ import "./App.css";
 import createBoard from './services/createBoard'
 import QuestionCard from './components/questionCard'
 import LandingPage from './components/landingPage'
+import Header from './components/Header'
 
 function App() {
   const [board, setBoard] = useState()
@@ -13,8 +14,8 @@ function App() {
 
   useEffect(() => createBoard(setBoard), [])
 
-  const itemClick = (column, row) => {
-    setColumn(column)
+  const itemClick = (col, row) => {
+    setColumn(col)
     setRow(row)
     setView('question')
   }
@@ -22,34 +23,21 @@ function App() {
   const renderMain = () => {
     if (view ==='landing'){
       return(
-      <>
         <LandingPage
           setView={setView}
         />
-      </>)
     }
-    else if (view ==='grid'){
-      return(
-        <>
-          <JeopardyGrid
-            board={board}
-            itemClick={itemClick} />
-        </>
-      )
-    } else if (view ==='question'){
-      return (
-        <>
-          <QuestionCard
-            question = {board[column].clues[row]}
-            setView={setView}
-            />
-        </>
-      )
-    }
+    if (view ==='grid') return (
+      <JeopardyGrid board={board} itemClick={itemClick} />
+    )
+    if (view ==='question') return (
+      <QuestionCard question = {board[col].clues[row]} setView={setView}/>
+    )
   }
 
   return (
     <div className="App">
+      <Header />
       <h1>Quiz Platform</h1>
       {renderMain()}
     </div>
