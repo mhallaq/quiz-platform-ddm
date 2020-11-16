@@ -3,10 +3,11 @@ import JeopardyGrid from './components/jeopardyGrid'
 import "./App.css";
 import createBoard from './services/createBoard'
 import QuestionCard from './components/questionCard'
+import LandingPage from './components/landingPage'
 
 function App() {
-  const [board, setBoard] = useState([])
-  const [view, setView] = useState('grid')
+  const [board, setBoard] = useState()
+  const [view, setView] = useState('landing')
   const [column, setColumn]= useState()
   const [row, setRow] = useState()
 
@@ -19,7 +20,15 @@ function App() {
   }
 
   const renderMain = () => {
-    if (view ==='grid'){
+    if (view ==='landing'){
+      return(
+      <>
+        <LandingPage
+          setView={setView}
+        />
+      </>)
+    }
+    else if (view ==='grid'){
       return(
         <>
           <JeopardyGrid
