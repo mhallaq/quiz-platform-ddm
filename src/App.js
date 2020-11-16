@@ -25,7 +25,7 @@ function App() {
       return(
         <LandingPage
           setView={setView}
-        />
+        />)
     }
     if (view ==='grid') return (
       <JeopardyGrid board={board} itemClick={itemClick} />
