@@ -9,17 +9,17 @@ import Header from './components/Header'
 function App() {
   const [board, setBoard] = useState()
   const [view, setView] = useState('landing')
-  const [col, setColumn]= useState()
+  const [col, setColumn] = useState()
   const [row, setRow] = useState()
 
 
-  
+
   const [questionValue, setQuestionValue] = useState()
   const [bank, setBank] = useState(0)
 
   useEffect(() => createBoard(setBoard), [])
 
-  const itemClick = (col, row, value ) => {
+  const itemClick = (col, row, value) => {
     setColumn(col)
     setRow(row)
     setQuestionValue(value)
@@ -35,18 +35,18 @@ function App() {
   }
 
   const renderMain = () => {
-    if (view ==='landing'){
-      return(
+    if (view === 'landing') {
+      return (
         <LandingPage
           setView={setView}
         />)
     }
-    if (view ==='grid') return (
+    if (view === 'grid') return (
       <JeopardyGrid
         board={board}
         itemClick={itemClick} />
     )
-    if (view ==='question') return (
+    if (view === 'question') return (
       <QuestionCard
         clue={board[col].clues[row]}
         setView={setView}
@@ -58,9 +58,12 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Header bank={bank} setBank={setBank}/>
-      {renderMain()}
+
+    <div className="App ">
+      <div className="gradient-background">
+        <Header bank={bank} setBank={setBank} />
+        {renderMain()}
+      </div>
     </div>
   );
 }

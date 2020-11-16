@@ -1,17 +1,13 @@
-import React from 'react';
 import { Box, Container, Button, Grid,  makeStyles } from '@material-ui/core';
 import alexTrebek from '../public/images/alex_trebek_clean.png'
-//import jeopardyBackground from '../public/images/jeopardy_background.jpg'
 
 const useStyles = makeStyles(theme => ({
   main: {
     alignItems: 'center',
-    // justifyContent: "center",
     display: "flex",
     flexDirection: 'column',
     width: '100%',
     height: '100vh',
-    // backgroundImage: `url(${jeopardyBackground})`,
     color: '#FFFFFF',
     "-webkit-text-stroke": '1px black',
     fontWeight: 'bold',
@@ -19,16 +15,6 @@ const useStyles = makeStyles(theme => ({
       height:'100%'
     }
   },
-  jeopardyBackground:{
-    background: 'linear-gradient(154deg, #8a2be2, #9400d3, #daa520, #ff00bd)',
-    backgroundSize: '800% 800%',
-    animation: `$BackgroundGradient 10s ${theme.transitions.easing.easeInOut} infinite`,
-  },
-  '@keyframes BackgroundGradient': {
-    '0%' :{ backgroundPosition: '76% 0%'},
-    '50%' :{ backgroundPosition: '25% 100%'},
-    '100%' :{ backgroundPosition: '76% 0%'},
-},
   imageContainer:{
     display:'flex',
     flexDirection:'column',
@@ -37,26 +23,29 @@ const useStyles = makeStyles(theme => ({
   },
   alex:{
     objectFit:'contain',
-    height:'auto',
-    width:'100%'
+    maxHeight: "70vh",
   },
   title: {
     marginTop: '5vh',
     fontSize:'2rem'
   },
   bottomRow: {
-    height: "100%",
+    height:'100%',
     [theme.breakpoints.down('sm')]: {
       flexDirection:'column-reverse'
     }
   },
   button: {
+    fontFamily: 'Swiss911',
     border:'1px solid black',
     backgroundColor: '#FFFFFF',
+    fontSize:'1.5rem',
+    "-webkit-text-stroke": '0px',
     width:'30%',
     '&:hover':{
       backgroundColor: "#060CE9",
-      color:'#FFFFFF'
+      color:'#FFFFFF',
+      "-webkit-text-stroke": '1px black',
 }
   },
 
@@ -67,9 +56,9 @@ export default function LandingPage(props) {
   const classes = useStyles();
 
   return (
-    <Box className={`${classes.main} ${classes.jeopardyBackground}`} >
+    <Box className={`${classes.main}`} >
 
-        <Box className={`${classes.title} `} >
+        <Box className={`${classes.title} logo`} >
           <h1>Jeopardy!</h1>
         </Box>
       <Grid container className={classes.bottomRow} >
