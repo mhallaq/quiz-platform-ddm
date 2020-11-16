@@ -53,3 +53,21 @@ code {
 }
 
 
+.gradient-background {
+    background: linear-gradient(149deg, #8a2be2, #9400d3, #daa520, #ff00bd);
+    background-size: 800% 800%;
+    min-height: 100vh;
+    -webkit-animation: gradientBackground 10s ease infinite;
+    animation: gradientBackground 10s ease infinite;
+}
+
+@-webkit-keyframes gradientBackground {
+    0%{background-position:55% 0%}
+    50%{background-position:46% 100%}
+    100%{background-position:55% 0%}
+}
+@keyframes gradientBackground {
+    0%{background-position:55% 0%}
+    50%{background-position:46% 100%}
+    100%{background-position:55% 0%}
+}

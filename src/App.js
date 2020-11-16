@@ -28,18 +28,25 @@ function App() {
         />)
     }
     if (view ==='grid') return (
-      <JeopardyGrid board={board} itemClick={itemClick} />
+      <>
+        <Header />
+        <JeopardyGrid board={board} itemClick={itemClick} />
+      </>
     )
     if (view ==='question') return (
-      <QuestionCard question = {board[col].clues[row]} setView={setView}/>
+      <>
+        <Header />
+        <QuestionCard question = {board[col].clues[row]} setView={setView}/>
+      </>
     )
   }
 
   return (
-    <div className="App">
-      <Header />
-      <h1>Quiz Platform</h1>
-      {renderMain()}
+    <div className="App ">
+      <div className="gradient-background">
+        {renderMain()}
+      </div>
+
     </div>
   );
 }
