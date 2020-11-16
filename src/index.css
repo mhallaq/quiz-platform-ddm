@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+@font-face {
+  font-family: 'Swiss911';
+  src: url('./fonts/categories_prices/swiss911.eot');
+  src: url('./fonts/categories_prices/swiss911.eot?#iefix') format('embedded-opentype'),
+      url('./fonts/categories_prices/swiss911.woff2') format('woff2'),
+      url('./fonts/categories_prices/swiss911.woff') format('woff'),
+      url('./fonts/categories_prices/swiss911.ttf') format('truetype'),
+      url('./fonts/categories_prices/swiss911.svg#swiss911') format('svg');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'KorinnaBold';
+  src: url('./fonts/clues/KorinnaBold.eot');
+  src: url('./fonts/clues/KorinnaBold.eot?#iefix') format('embedded-opentype'),
+      url('./fonts/clues/KorinnaBold.woff2') format('woff2'),
+      url('./fonts/clues/KorinnaBold.woff') format('woff'),
+      url('./fonts/clues/KorinnaBold.ttf') format('truetype'),
+      url('./fonts/clues/KorinnaBold.svg#KorinnaBold') format('svg');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gyparody';
+  src: url('./fonts/logo/Gyparody.eot');
+  src: url('./fonts/logo/Gyparody.eot?#iefix') format('embedded-opentype'),
+      url('./fonts/logo/Gyparody.woff2') format('woff2'),
+      url('./fonts/logo/Gyparody.woff') format('woff'),
+      url('./fonts/logo/Gyparody.ttf') format('truetype'),
+      url('./fonts/logo/Gyparody.svg#Gyparody') format('svg');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
+
