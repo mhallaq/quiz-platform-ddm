@@ -9,7 +9,7 @@ import Header from './components/Header'
 function App() {
   const [board, setBoard] = useState()
   const [view, setView] = useState('landing')
-  const [column, setColumn]= useState()
+  const [col, setColumn]= useState()
   const [row, setRow] = useState()
 
   useEffect(() => createBoard(setBoard), [])
