@@ -42,13 +42,13 @@ export default function QuestionCard(props) {
         <h1>{clue.question}</h1>
       </Box>
       <div style={{ width: '100%', display: 'flex', flexflow: 'row wrap', justifyContent: 'space-around' }}>
-        <Button onClick={correctAnswer} variant="contained" color="secondary">
+        <Button onClick={correctAnswer} variant="contained">
           {clue.answer}
         </Button>
-        <Button onClick={wrongAnswer} variant="contained" color="secondary">
+        <Button onClick={wrongAnswer} variant="contained">
           Wrong Answer
       </Button>
-        <Button onClick={wrongAnswer}variant="contained" color="secondary">
+        <Button onClick={wrongAnswer}variant="contained">
           Wrong Answer
       </Button>
       </div>
