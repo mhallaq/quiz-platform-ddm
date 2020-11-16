@@ -2,6 +2,7 @@ import React from 'react';
 // import Container from '@material-ui/core/Container';
 import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   main: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     "-webkit-text-stroke": '1px black',
     fontWeight: '900',
   },
-  question:{
+  question: {
     height: '70vh',
     width: "80%"
   },
@@ -29,16 +30,27 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function QuestionCard(props) {
+
+  const { clue, setView, correctAnswer, wrongAnswer } = props
+
+
   const classes = useStyles();
 
   return (
-    <Box className={classes.main} onClick={()=>props.setView('grid')}>
+    <Box className={classes.main} onClick={() => setView('grid')}>
       <Box className={`${classes.question} ${classes.main}`} >
-        <h1>{props.question.question}</h1>
+        <h1>{clue.question}</h1>
       </Box>
-      <div style={{width: '100%', display: 'flex', flexflow: 'row wrap', justifyContent: 'space-around'}}>
-        <div>Right Answer</div>
-        <div>Wrong Answer</div> 
+      <div style={{ width: '100%', display: 'flex', flexflow: 'row wrap', justifyContent: 'space-around' }}>
+        <Button onClick={correctAnswer} variant="contained" color="secondary">
+          {clue.answer}
+        </Button>
+        <Button onClick={wrongAnswer} variant="contained" color="secondary">
+          Wrong Answer
+      </Button>
+        <Button onClick={wrongAnswer}variant="contained" color="secondary">
+          Wrong Answer
+      </Button>
       </div>
     </Box>
   )

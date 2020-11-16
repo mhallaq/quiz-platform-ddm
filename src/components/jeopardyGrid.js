@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function JeopardyGrid(props) {
-  const { board } = props || []
+  const { board, itemClick } = props || []
   const classes = useStyles();
 
   return (
@@ -34,19 +34,19 @@ export default function JeopardyGrid(props) {
             <Box className={classes.item}>
               <h2>{column.title}</h2>
             </Box>
-            <Box className={classes.item} onClick={() => props.itemClick(index, 0)}>
+            <Box className={classes.item} onClick={() => itemClick(index, 0, 200)}>
               <h2>$200</h2>
             </Box>
-            <Box className={classes.item} onClick={() => props.itemClick(index, 1)}>
+            <Box className={classes.item} onClick={() => itemClick(index, 1, 400)}>
               <h2>$400</h2>
             </Box>
-            <Box className={classes.item} onClick={() => props.itemClick(index, 2)}>
+            <Box className={classes.item} onClick={() => itemClick(index, 2, 600)}>
               <h2>$600</h2>
             </Box>
-            <Box className={classes.item} onClick={() => props.itemClick(index, 3)}>
+            <Box className={classes.item} onClick={() => itemClick(index, 3, 800)}>
               <h2>$800</h2>
             </Box>
-            <Box className={classes.item} onClick={() => props.itemClick(index, 4)}>
+            <Box className={classes.item} onClick={() => itemClick(index, 4, 1000)}>
               <h2>$1000</h2>
             </Box>
           </Grid>)

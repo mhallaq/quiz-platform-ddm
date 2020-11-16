@@ -11,14 +11,27 @@ function App() {
   const [view, setView] = useState('landing')
   const [col, setColumn]= useState()
   const [row, setRow] = useState()
+
+
+  
+  const [questionValue, setQuestionValue] = useState()
   const [bank, setBank] = useState(0)
 
   useEffect(() => createBoard(setBoard), [])
 
-  const itemClick = (col, row) => {
+  const itemClick = (col, row, value ) => {
     setColumn(col)
     setRow(row)
+    setQuestionValue(value)
     setView('question')
+  }
+
+  const correctAnswer = () => {
+    setBank(bank + questionValue)
+  }
+
+  const wrongAnswer = () => {
+    setBank(bank - questionValue)
   }
 
   const renderMain = () => {
@@ -29,10 +42,18 @@ function App() {
         />)
     }
     if (view ==='grid') return (
-      <JeopardyGrid board={board} itemClick={itemClick} />
+      <JeopardyGrid
+        board={board}
+        itemClick={itemClick} />
     )
     if (view ==='question') return (
-      <QuestionCard question = {board[col].clues[row]} setView={setView}/>
+      <QuestionCard
+        clue={board[col].clues[row]}
+        setView={setView}
+        setQuestionValue={setQuestionValue}
+        correctAnswer={correctAnswer}
+        wrongAnswer={wrongAnswer}
+      />
     )
   }
 
