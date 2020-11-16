@@ -3,6 +3,7 @@ import JeopardyGrid from './components/jeopardyGrid'
 import "./App.css";
 import createBoard from './services/createBoard'
 import QuestionCard from './components/questionCard'
+import Header from './components/Header'
 
 function App() {
   const [board, setBoard] = useState()
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <h1>Quiz Platform</h1>
       {renderMain()}
     </div>

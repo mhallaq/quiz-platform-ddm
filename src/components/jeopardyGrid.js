@@ -8,6 +8,8 @@ const useStyles = makeStyles(theme => ({
     minHeight: "500px"
   },
   item: {
+    fontFamily: 'Swiss911',
+    fontSize: '1.5rem',
     border: '2px solid black',
     fontWeight: 'bold',
     height: "150px",
@@ -16,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     backgroundColor: "#060CE9",
     color: '#FFFFFF',
-    "-webkit-text-stroke": '1px black',
+    "-webkit-text-stroke": '.5px black',
   }
 }))
 
