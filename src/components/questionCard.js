@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: "center",
     display: "flex",
+    flexFlow: "column nowrap",
     width: '100%',
     backgroundColor: "#060CE9",
     color: '#FFFFFF',
@@ -35,6 +36,10 @@ export default function QuestionCard(props) {
       <Box className={`${classes.question} ${classes.main}`} >
         <h1>{props.question.question}</h1>
       </Box>
+      <div style={{width: '100%', display: 'flex', flexflow: 'row wrap', justifyContent: 'space-around'}}>
+        <div>Right Answer</div>
+        <div>Wrong Answer</div> 
+      </div>
     </Box>
   )
 }

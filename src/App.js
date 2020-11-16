@@ -10,6 +10,7 @@ function App() {
   const [view, setView] = useState('grid')
   const [col, setColumn]= useState()
   const [row, setRow] = useState()
+  const [bank, setBank] = useState(0)
 
   useEffect(() => createBoard(setBoard), [])
 
@@ -30,8 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <h1>Quiz Platform</h1>
+      <Header bank={bank} setBank={setBank}/>
       {renderMain()}
     </div>
   );
