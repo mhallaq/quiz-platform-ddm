@@ -11,8 +11,14 @@ function App() {
   const [view, setView] = useState('landing')
   const [col, setColumn] = useState()
   const [row, setRow] = useState()
-
-
+  const [history, setHistory]= useState([
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+  ])
 
   const [questionValue, setQuestionValue] = useState()
   const [bank, setBank] = useState(0)
@@ -24,6 +30,10 @@ function App() {
     setRow(row)
     setQuestionValue(value)
     setView('question')
+    setHistory(prevHistory=>{
+      prevHistory[col][row]=false;
+      return [...prevHistory];
+    })
   }
 
   const correctAnswer = () => {
@@ -44,7 +54,8 @@ function App() {
     if (view === 'grid') return (
       <JeopardyGrid
         board={board}
-        itemClick={itemClick} />
+        itemClick={itemClick}
+        history={history}/>
     )
     if (view === 'question') return (
       <QuestionCard
