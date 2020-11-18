@@ -5,7 +5,9 @@ import createBoard from './services/createBoard'
 import QuestionCard from './components/questionCard'
 import LandingPage from './components/landingPage'
 import Header from './components/Header'
+import DailyDouble from './components/dailyDouble'
 import { fetchRand } from './services/apiConfig'
+
 
 function App() {
   const [board, setBoard] = useState()
@@ -23,7 +25,9 @@ function App() {
 
   const [questionValue, setQuestionValue] = useState()
   const [bank, setBank] = useState(0)
+  //const [dailyDouble, setDailyDouble] = useState([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
   const [randomAnswers, setRandomAnswers] = useState()
+  const dailyDouble = [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]
 
   useEffect( () => {
     createBoard(setBoard)
@@ -34,20 +38,26 @@ function App() {
     getWrongAnswers()
   }, [])
 
-
-
-  
-
+ 
   const itemClick = (col, row, value) => {
     setColumn(col)
     setRow(row)
     setQuestionValue(value)
-    setView('question')
+
     setHistory(prevHistory=>{
       prevHistory[col][row]=false;
       return [...prevHistory];
     })
+    if (col === dailyDouble[0] && row === dailyDouble[1]){
+      setView('dailyDouble')
+    }else{
+      setView('question')
+    }
   }
+  
+//   const nextRound = () => {
+//     setDailyDouble([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
+//   }
 
   const randIdx = Math.floor(Math.random() * 98)
 
@@ -82,6 +92,9 @@ function App() {
         wrongAnswer={wrongAnswer}
         randomAnswers={[randomAnswers[randIdx], randomAnswers[randIdx+1]]}
       />
+    )
+    if (view==='dailyDouble') return (
+      <DailyDouble setView={setView}/>
     )
   }
 
