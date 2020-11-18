@@ -42,7 +42,7 @@ const QuestionCard = React.memo((props) => {
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
     return () => clearInterval(timer);
-  }, [counter, setView]);
+  }, []);
 
   const classes = useStyles();
 
