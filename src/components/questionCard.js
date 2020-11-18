@@ -1,6 +1,6 @@
 import React from "react";
 // import Container from '@material-ui/core/Container';
-import { Box } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
@@ -33,15 +33,18 @@ const QuestionCard = React.memo((props) => {
 
   console.log(randomAnswers);
   //Seconds Counter
-  const [counter, setCounter] = React.useState(8);
-  React.useEffect((setView) => {
+  const [counter, setCounter] = React.useState(9);
+  React.useEffect(() => {
+    startCountDown()
+  }, []);
+
+  const startCountDown = () => {
+    const timer = counter > 0 && setInterval(() => setCounter(counter - 2), 2000);
+    setCounter(timer)
     if (counter === 0) {
       setView("grid");
     }
-    const timer =
-      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    return () => clearInterval(timer);
-  }, [counter]);
+  }
 
   const classes = useStyles();
 
@@ -57,6 +60,12 @@ const QuestionCard = React.memo((props) => {
 
   console.log(randomAnswers);
 
+  const timerTiles = (counter) => {
+    for (let i = 1; i < counter; i++) {
+      return test
+    }
+  }
+
   const multipleChoice = [
     <Button onClick={correctAnswer} variant="contained">
       {clue.answer}
@@ -71,9 +80,16 @@ const QuestionCard = React.memo((props) => {
 
   return (
     <Box className={classes.main} onClick={() => setView("grid")}>
+
+
+
+      <Grid container direction="row" >
+        test
+        {timerTiles}
+      </Grid>
       <Box className={`${classes.question} ${classes.main}`}>
         <h1>{clue.question}</h1>
-        <div>Countdown: {counter}</div>
+        {/* <div>Countdown: {counter}</div> */}
       </Box>
       <div
         style={{
@@ -85,6 +101,7 @@ const QuestionCard = React.memo((props) => {
           alignItems: "flex-start",
         }}
       >
+
         {shuffleArray(multipleChoice)}
       </div>
     </Box>

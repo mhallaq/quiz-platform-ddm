@@ -12,7 +12,7 @@ ValueLabelComponent.propTypes = {
 };
 
 function ValueLabelComponent(props) {
-    const { children, open, value } = props;
+    
     return (
         // <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
         //     {children}
@@ -53,7 +53,7 @@ const PrettoSlider = withStyles({
 })(Slider);
 
 export default function CustomizedSlider(props) {
-    const { betValue, setBetValue, bank, setBank, percentage, setPercentage, maxBet } = props
+    const { betValue, setBetValue, percentage, setPercentage, maxBet } = props
 
     const sliderUpdate = (value) => {
         console.log(value)
@@ -68,7 +68,6 @@ export default function CustomizedSlider(props) {
                 valueLabelDisplay="off"
                 aria-label="pretto slider"
                 defaultValue={percentage}
-                value={betValue}
                 value={Math.ceil((betValue / maxBet) * 100)}
                 onChangeCommitted={(e, value) => sliderUpdate(value)}
                 style={{ width: '500px' }}
