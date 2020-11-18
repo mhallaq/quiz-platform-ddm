@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function QuestionCard(props) {
-  const { clue, setView, correctAnswer, wrongAnswer, randomAnswers } = props
+  const { clue, correctAnswer, wrongAnswer, randomAnswers } = props
   const classes = useStyles();
 
   // Durstenfeld shuffle, an optimized version of Fisher-Yates algorithm
@@ -43,19 +43,20 @@ export default function QuestionCard(props) {
   }
 
   const multipleChoice = [
-    <Button onClick={correctAnswer} variant="contained">
+    <Button onClick={correctAnswer} variant="contained" onClick={() => goBack()}>
       {clue.answer}
     </Button>,
-    <Button onClick={wrongAnswer} variant="contained">
+      <Button onClick={wrongAnswer} variant="contained" onClick={() => goBack()}>
       {randomAnswers[0]}
     </Button>,
-    <Button onClick={wrongAnswer} variant="contained">
+      <Button onClick={wrongAnswer} variant="contained" onClick={() => goBack()}>
       {randomAnswers[1]}
     </Button>
   ]
 
+
   return (
-    <Box className={classes.main} onClick={() => setView('grid')}>
+    <Box className={classes.main} >
       <Box className={`${classes.question} ${classes.main}`} >
         <h1>{clue.question}</h1>
       </Box>

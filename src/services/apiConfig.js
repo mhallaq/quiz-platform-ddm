@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const URL = "https://jservice.io/api/"
 
-const CATEGORIES_URL = URL + "categories?count=6&offset=" + Math.random() * 1000
+const CATEGORIES_URL = URL + "categories?count=12&offset=" + Math.random() * 1000
 const CLUES_URL = URL + "clues?category="
 const RAND_URL = URL + "random?count=100"
 
@@ -37,16 +37,16 @@ export const fetchRand = async (setRandomAnswers) => {
     }
 }
 
-function makeGetRequest() { 
-    return new Promise(function (resolve, reject) { 
-        axios.get(RAND_URL).then( 
-            (response) => { 
-                const result = response.data; 
-                resolve(result); 
-            }, 
-                (error) => { 
-                reject(error); 
-            } 
-        ); 
-    }); 
-} 
+function makeGetRequest() {
+    return new Promise(function (resolve, reject) {
+        axios.get(RAND_URL).then(
+            (response) => {
+                const result = response.data;
+                resolve(result);
+            },
+                (error) => {
+                reject(error);
+            }
+        );
+    });
+}
