@@ -125,7 +125,7 @@ function App() {
 
     if (view === 'grid') return (
       <JeopardyGrid
-        board={round===1? board[0]: board[1]}
+        board={board}
         itemClick={itemClick}
         history={history}
         round={round}/>
