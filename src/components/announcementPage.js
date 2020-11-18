@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: '900',
   },
   question: {
-    height: '70vh',
+    height: '85vh',
     width: "80%",
     fontSize: "2.1rem"
   },
@@ -24,10 +24,10 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-export default function DailyDouble(props) {
+export default function AnnouncementPage(props) {
 
-  const {setView, } = props
-  const [dailyTimer, setDailyTimer] = React.useState(1)
+  const {setView, text, next} = props
+  const [timer, setTimer] = React.useState(1)
 
   const classes = useStyles();
 
@@ -37,17 +37,17 @@ export default function DailyDouble(props) {
   });
 
   const countdown = () =>{
-    if (dailyTimer === 0) {
-      setView('wager')
+    if (timer === 0) {
+      setView(next)
     }
-    setDailyTimer(dailyTimer - 1)
+    setTimer(timer - 1)
   }
 
   return (
     <Box className={classes.main} >
 
       <Box className={`${classes.question} ${classes.main}`} >
-        <h1>Daily Double</h1>
+        <h1>{text}</h1>
       </Box>
 
 

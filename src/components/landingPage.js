@@ -62,11 +62,11 @@ export default function LandingPage(props) {
           <h1>Jeopardy!</h1>
         </Box>
       <Grid container className={classes.bottomRow} >
-        <Grid item sm={4} xs={12} className={classes.imageContainer}>
+        <Grid item md={4} sm={12} className={classes.imageContainer}>
           <h3><i>Remembering Alex Trebek.</i></h3>
           <img className={classes.alex} src={alexTrebek} alt='Alex Trebek'></img>
         </Grid>
-        <Grid item sm={4} xs={12}>
+        <Grid item md={4} sm={12}>
           <Container>
             <h2><u>Rules</u></h2>
             <h3>1. To start the game, press the start button.</h3>
@@ -75,9 +75,9 @@ export default function LandingPage(props) {
             <h3>4. If answered correctly, your score will increase and incorrect answers will detract from your score.</h3>
           </Container>
         </Grid>
-        <Grid item sm={4} xs={12}>
+        <Grid item md={4} sm={12}>
           <Button size="large" className={classes.button}
-            onClick={() => props.setView('grid')}
+            onClick={() => {props.setView('grid'); props.start();}}
           >
             <h1>Play</h1>
           </Button>

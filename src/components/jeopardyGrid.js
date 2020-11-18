@@ -30,12 +30,10 @@ const useStyles = makeStyles(theme => ({
 export default function JeopardyGrid(props) {
   const { board, itemClick, history} = props || []
   const classes = useStyles();
-  console.log("history",history)
   return (
     <Grid container direction="row" className={classes.main} >
       {board && board.map((column, index) => {
         const taken = props.history[index]
-        console.log("taken",taken, "index",index)
         return (
           <Grid key={index} xs={2} container direction="column" item>
             <Box className={`${classes.item} ${classes.title}`}>
