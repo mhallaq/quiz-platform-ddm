@@ -25,10 +25,18 @@ function App() {
   const [bank, setBank] = useState(0)
   const [randomAnswers, setRandomAnswers] = useState()
 
-  useEffect(async () => {
+  useEffect( () => {
     createBoard(setBoard)
-    setRandomAnswers(await fetchRand())
+
+    async function getWrongAnswers () {
+      setRandomAnswers(await fetchRand())
+    }
+    getWrongAnswers()
   }, [])
+
+
+
+  
 
   const itemClick = (col, row, value) => {
     setColumn(col)
