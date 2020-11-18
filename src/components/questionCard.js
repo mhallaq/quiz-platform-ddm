@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 // import Container from '@material-ui/core/Container';
-import { Box, Grid } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Counter from "./Counter";

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function JeopardyGrid(props) {
-  const { board, itemClick, history } = props || [];
+  const { board, itemClick } = props || [];
   const classes = useStyles();
   // console.log("history",history)
   return (
