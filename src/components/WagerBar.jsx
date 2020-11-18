@@ -11,6 +11,16 @@ ValueLabelComponent.propTypes = {
     value: PropTypes.number.isRequired,
 };
 
+function ValueLabelComponent(props) {
+    const { children, open, value } = props;
+    return (
+        // <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
+        //     {children}
+        // </Tooltip>
+        <div></div>
+    );
+}
+
 const PrettoSlider = withStyles({
     root: {
         color: 'black',

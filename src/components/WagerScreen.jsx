@@ -47,7 +47,7 @@ export default function WagerScreen(props) {
     return (
         <Box className={classes.main} >
             <div style={{ height: '94vh', width: '100%', display: 'grid', placeItems: 'center' }}>
-                <Container maxWidth="sm" style={{ backgroundColor: 'white', height: 'auto', borderRadius: '5px', textAlign: "left", color: 'black' }}>
+                <Container maxWidth="sm" style={{ backgroundColor: 'white', height: 'auto', borderRadius: '5px', textAlign: "left", color: 'black', maxWidth: '500px' }}>
                     <h1>Enter your wager</h1>
                     <div>
                         <FormControl fullWidth className={classes.margin} variant="outlined">

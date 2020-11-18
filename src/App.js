@@ -19,7 +19,7 @@ function App() {
   const [round, setRound] = useState(1)
   const [col, setColumn] = useState()
   const [row, setRow] = useState()
-  const [history, setHistory]= useState([
+  const [history, setHistory] = useState([
     [true, true, true, true, true],
     [true, true, true, true, true],
     [true, true, true, true, true],
@@ -33,10 +33,11 @@ function App() {
   // const [dailyDouble, setDailyDouble] = useState([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
   const [randomAnswers, setRandomAnswers] = useState()
   const dailyDouble = [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]
+  console.log(dailyDouble)
   const [maxBet, setMaxBet] = useState(0);
 
 
- 
+
 
   useEffect(() => {
     createBoard(setBoard);
@@ -74,7 +75,7 @@ function App() {
     document.getElementById("correct-sound").play();
     setTimeout(() => {
       setBank(bank + questionValue);
-    }, 9000);
+    }, 1000);
   };
 
   const wrongAnswer = () => {
@@ -82,10 +83,10 @@ function App() {
 
     setTimeout(() => {
       setBank(bank - questionValue);
-    }, 9000);
+    }, 1000);
   };
 
-  
+
 
   const renderMain = () => {
     if (view === "landing") {
@@ -109,10 +110,13 @@ function App() {
     if (view === "dailyDouble") return <DailyDouble setView={setView} />;
   };
 
-    if (view === 'wager') return (
-      <WagerScreen bank={bank} setBank={setBank} round={round} maxBet={maxBet && maxBet} setQuestionValue={setQuestionValue} setView={setView}/>
-    )
-  
+  if (view === 'wager') return (
+    <div className="gradient-background">
+      <Header bank={bank} setBank={setBank} />
+      <WagerScreen bank={bank} setBank={setBank} round={round} maxBet={maxBet && maxBet} setQuestionValue={setQuestionValue} setView={setView} />
+    </div>
+  )
+
   return (
     <div className="App ">
       <div
