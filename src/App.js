@@ -9,7 +9,7 @@ import DailyDouble from './components/dailyDouble'
 
 function App() {
   const [board, setBoard] = useState()
-  const [view, setView] = useState('dailyDouble')
+  const [view, setView] = useState('landing')
   const [col, setColumn] = useState()
   const [row, setRow] = useState()
   const [history, setHistory]= useState([
