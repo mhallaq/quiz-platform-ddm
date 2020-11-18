@@ -25,9 +25,9 @@ function App() {
 
   const [questionValue, setQuestionValue] = useState()
   const [bank, setBank] = useState(0)
-  const [dailyDouble, setDailyDouble] = useState([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
+  //const [dailyDouble, setDailyDouble] = useState([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
   const [randomAnswers, setRandomAnswers] = useState()
-
+  const dailyDouble = [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]
 
   useEffect( () => {
     createBoard(setBoard)
@@ -55,9 +55,9 @@ function App() {
     }
   }
   
-  const nextRound = () => {
-    setDailyDouble([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
-  }
+//   const nextRound = () => {
+//     setDailyDouble([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
+//   }
 
   const randIdx = Math.floor(Math.random() * 98)
 
