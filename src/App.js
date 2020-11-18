@@ -6,6 +6,8 @@ import QuestionCard from './components/questionCard'
 import LandingPage from './components/landingPage'
 import Header from './components/Header'
 import DailyDouble from './components/dailyDouble'
+import { fetchRand } from './services/apiConfig'
+
 
 function App() {
   const [board, setBoard] = useState()
@@ -24,9 +26,19 @@ function App() {
   const [questionValue, setQuestionValue] = useState()
   const [bank, setBank] = useState(0)
   const [dailyDouble, setDailyDouble] = useState([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
+  const [randomAnswers, setRandomAnswers] = useState()
 
-  useEffect(() => createBoard(setBoard), [])
 
+  useEffect( () => {
+    createBoard(setBoard)
+
+    async function getWrongAnswers () {
+      setRandomAnswers(await fetchRand())
+    }
+    getWrongAnswers()
+  }, [])
+
+ 
   const itemClick = (col, row, value) => {
     setColumn(col)
     setRow(row)
@@ -42,6 +54,8 @@ function App() {
       setView('question')
     }
   }
+
+  const randIdx = Math.floor(Math.random() * 98)
 
   const correctAnswer = () => {
     setBank(bank + questionValue)
@@ -66,11 +80,13 @@ function App() {
     )
     if (view === 'question') return (
       <QuestionCard
+        
         clue={board[col].clues[row]}
         setView={setView}
         setQuestionValue={setQuestionValue}
         correctAnswer={correctAnswer}
         wrongAnswer={wrongAnswer}
+        randomAnswers={[randomAnswers[randIdx], randomAnswers[randIdx+1]]}
       />
     )
     if (view==='dailyDouble') return (
@@ -81,7 +97,7 @@ function App() {
   return (
 
     <div className="App ">
-      <div className="gradient-background">
+      <div className="gradient-background" style={{display: 'flex', flexFlow: 'column nowrap', alignContent: 'flex-end'}}>
         <Header bank={bank} setBank={setBank} />
         {renderMain()}
       </div>

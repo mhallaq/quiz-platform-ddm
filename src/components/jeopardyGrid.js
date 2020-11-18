@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1.5rem',
     border: '2px solid black',
     fontWeight: 'bold',
-    height: "150px",
+    height: "15vh",
     alignItems: 'center',
     justifyContent: "center",
     display: "flex",
