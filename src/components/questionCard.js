@@ -43,13 +43,13 @@ export default function QuestionCard(props) {
   }
 
   const multipleChoice = [
-    <Button onClick={correctAnswer} variant="contained" onClick={() => goBack()}>
+    <Button onClick={correctAnswer} variant="contained">
       {clue.answer}
     </Button>,
-      <Button onClick={wrongAnswer} variant="contained" onClick={() => goBack()}>
+      <Button onClick={wrongAnswer} variant="contained">
       {randomAnswers[0]}
     </Button>,
-      <Button onClick={wrongAnswer} variant="contained" onClick={() => goBack()}>
+      <Button onClick={wrongAnswer} variant="contained">
       {randomAnswers[1]}
     </Button>
   ]
