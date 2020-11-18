@@ -7,6 +7,7 @@ import LandingPage from './components/landingPage'
 import Header from './components/Header'
 import DailyDouble from './components/dailyDouble'
 import { fetchRand } from './services/apiConfig'
+import WagerScreen from './components/WagerScreen'
 
 
 function App() {
@@ -94,7 +95,11 @@ function App() {
       />
     )
     if (view==='dailyDouble') return (
-      <DailyDouble setView={setView}/>
+      <DailyDouble setView={setView} />
+    )
+
+    if (view === 'wager') return (
+      <WagerScreen bank={bank} setBank={setBank} />
     )
   }
 
