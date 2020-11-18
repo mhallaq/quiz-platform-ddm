@@ -81,7 +81,7 @@ export default function WagerScreen(props) {
                     <Button
                         fullWidth={true}
                         style={{ backgroundColor: '#FFFF00', color: 'black', fontFamily: 'swiss911' }} onClick={() => setBetValue(maxBet)} variant="contained" >
-                        Max Bet ${maxBet} "Let's make it a true Daily Double"
+                        Max Bet ${maxBet}
                     </Button>
 
                     {/* </div> */}

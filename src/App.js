@@ -75,7 +75,7 @@ function App() {
     document.getElementById("correct-sound").play();
     setTimeout(() => {
       setBank(bank + questionValue);
-    }, 1000);
+    }, 500);
   };
 
   const wrongAnswer = () => {
@@ -83,7 +83,7 @@ function App() {
 
     setTimeout(() => {
       setBank(bank - questionValue);
-    }, 1000);
+    }, 500);
   };
 
 

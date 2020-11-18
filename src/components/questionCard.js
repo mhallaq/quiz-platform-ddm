@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 // import Container from '@material-ui/core/Container';
 import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Counter from "./Counter";
+import styled from "styled-components";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -18,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "900",
   },
   question: {
-    height: "70vh",
+    height: "60vh",
     width: "80%",
   },
   answerRow: {
@@ -26,70 +28,60 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     display: "flex",
   },
+  countdown: {
+    height: "2rem",
+    // width: "80vw",
+    margin: "auto",
+    // paddingTop: "5vh",
+    paddingBottom: "5vh"
+
+  },
 }));
 
-const QuestionCard = React.memo((props) => {
+//Styling Counter bar
+
+const CounterBarContainer = styled.div`
+  width: 100vw;
+  margin: 0 auto;
+`;
+
+const QuestionCard = (props) => {
   const { clue, setView, correctAnswer, wrongAnswer, randomAnswers } = props;
-
-  console.log(randomAnswers);
-  //Seconds Counter
-  const [counter, setCounter] = React.useState(9);
-  React.useEffect(() => {
-    startCountDown()
-  }, []);
-
-  const startCountDown = () => {
-    const timer = counter > 0 && setInterval(() => setCounter(counter - 2), 2000);
-    setCounter(timer)
-    if (counter === 0) {
-      setView("grid");
-    }
-  }
 
   const classes = useStyles();
 
   // Durstenfeld shuffle, an optimized version of Fisher-Yates algorithm
-  function shuffleArray(array) {
+  const shuffleArray = useCallback((array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
-      console.log(array[i], array[j]);
     }
     return array;
-  }
+  }, []);
 
-  console.log(randomAnswers);
 
-  const timerTiles = (counter) => {
-    for (let i = 1; i < counter; i++) {
-      return test
-    }
-  }
 
   const multipleChoice = [
     <Button onClick={correctAnswer} variant="contained">
-      {clue.answer}
+      <p dangerouslySetInnerHTML={{__html: clue.answer}}/>
     </Button>,
     <Button onClick={wrongAnswer} variant="contained">
-      {randomAnswers[0]}
+      <p dangerouslySetInnerHTML={{ __html: randomAnswers[0] }}/>
     </Button>,
     <Button onClick={wrongAnswer} variant="contained">
-      {randomAnswers[1]}
+      <p dangerouslySetInnerHTML={{ __html: randomAnswers[1] }}/>
     </Button>,
   ];
 
   return (
     <Box className={classes.main} onClick={() => setView("grid")}>
-
-
-
-      <Grid container direction="row" >
-        test
-        {timerTiles}
-      </Grid>
+      <Box className={classes.countdown}>
+        <CounterBarContainer>
+          <Counter setView={setView} wrongAnswer={wrongAnswer}/>
+        </CounterBarContainer>
+      </Box>
       <Box className={`${classes.question} ${classes.main}`}>
         <h1>{clue.question}</h1>
-        {/* <div>Countdown: {counter}</div> */}
       </Box>
       <div
         style={{
@@ -106,6 +98,6 @@ const QuestionCard = React.memo((props) => {
       </div>
     </Box>
   );
-});
+};
 
 export default QuestionCard;
