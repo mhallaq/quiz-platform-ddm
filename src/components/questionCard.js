@@ -34,6 +34,7 @@ const QuestionCard = React.memo((props) => {
   console.log(randomAnswers);
   //Seconds Counter
   const [counter, setCounter] = React.useState(8);
+
   React.useEffect(() => {
     if (counter === 0) {
       setView("grid");
@@ -41,7 +42,7 @@ const QuestionCard = React.memo((props) => {
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
     return () => clearInterval(timer);
-  }, [counter]);
+  }, [counter, setView]);
 
   const classes = useStyles();
 
