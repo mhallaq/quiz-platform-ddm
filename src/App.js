@@ -54,6 +54,10 @@ function App() {
       setView('question')
     }
   }
+  
+  const nextRound = () => {
+    setDailyDouble([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
+  }
 
   const randIdx = Math.floor(Math.random() * 98)
 
