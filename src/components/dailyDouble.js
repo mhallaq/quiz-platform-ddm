@@ -26,7 +26,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function DailyDouble(props) {
 
-  const {setView, } = props
+
+  const { setView } = props
   const [dailyTimer, setDailyTimer] = React.useState(1)
 
   const classes = useStyles();

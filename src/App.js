@@ -8,11 +8,13 @@ import Header from './components/Header'
 import DailyDouble from './components/dailyDouble'
 import { fetchRand } from './services/apiConfig'
 import WagerScreen from './components/WagerScreen'
+import maxBetService from './services/maxBet'
 
 
 function App() {
   const [board, setBoard] = useState()
   const [view, setView] = useState('landing')
+  const [round, setRound] = useState(1)
   const [col, setColumn] = useState()
   const [row, setRow] = useState()
   const [history, setHistory]= useState([
@@ -26,9 +28,14 @@ function App() {
 
   const [questionValue, setQuestionValue] = useState()
   const [bank, setBank] = useState(0)
-  //const [dailyDouble, setDailyDouble] = useState([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
+  const [dailyDouble, setDailyDouble] = useState([Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)])
   const [randomAnswers, setRandomAnswers] = useState()
-  const dailyDouble = [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]
+  // const dailyDouble = [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]
+  console.log(dailyDouble)
+  const [maxBet, setMaxBet] = useState(0);
+
+
+ 
 
   useEffect( () => {
     createBoard(setBoard)
@@ -44,6 +51,7 @@ function App() {
     setColumn(col)
     setRow(row)
     setQuestionValue(value)
+    setMaxBet(maxBetService(round, bank))
 
     setHistory(prevHistory=>{
       prevHistory[col][row]=false;
@@ -70,6 +78,8 @@ function App() {
     setBank(bank - questionValue)
   }
 
+  
+
   const renderMain = () => {
     if (view === 'landing') {
       return (
@@ -88,7 +98,6 @@ function App() {
         
         clue={board[col].clues[row]}
         setView={setView}
-        setQuestionValue={setQuestionValue}
         correctAnswer={correctAnswer}
         wrongAnswer={wrongAnswer}
         randomAnswers={[randomAnswers[randIdx], randomAnswers[randIdx+1]]}
@@ -99,10 +108,9 @@ function App() {
     )
 
     if (view === 'wager') return (
-      <WagerScreen bank={bank} setBank={setBank} />
+      <WagerScreen bank={bank} setBank={setBank} round={round} maxBet={maxBet && maxBet} setQuestionValue={setQuestionValue} setView={setView}/>
     )
   }
-
   return (
 
     <div className="App ">

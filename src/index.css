@@ -71,3 +71,7 @@ code {
     50%{background-position:46% 100%}
     100%{background-position:55% 0%}
 }
+
+.MuiSlider-root {
+  width: 100% !important;
+}
