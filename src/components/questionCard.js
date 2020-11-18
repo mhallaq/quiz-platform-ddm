@@ -1,36 +1,48 @@
-import React from 'react';
+import React from "react";
 // import Container from '@material-ui/core/Container';
-import { Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { Box } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   main: {
-    fontFamily: 'KorinnaBold',
-    alignItems: 'center',
+    fontFamily: "KorinnaBold",
+    alignItems: "center",
     justifyContent: "center",
     display: "flex",
     flexFlow: "column nowrap",
-    width: '100%',
+    width: "100%",
     backgroundColor: "#060CE9",
-    color: '#FFFFFF',
-    "-webkit-text-stroke": '1px black',
-    fontWeight: '900',
+    color: "#FFFFFF",
+    "-webkit-text-stroke": "1px black",
+    fontWeight: "900",
   },
   question: {
-    height: '70vh',
-    width: "80%"
+    height: "70vh",
+    width: "80%",
   },
   answerRow: {
     height: "150px",
-    alignItems: 'center',
+    alignItems: "center",
     display: "flex",
   },
+}));
 
-}))
+const QuestionCard = React.memo((props) => {
+  const { clue, setView, correctAnswer, wrongAnswer, randomAnswers } = props;
 
-export default function QuestionCard(props) {
-  const { clue, setView, correctAnswer, wrongAnswer, randomAnswers } = props
+  console.log(randomAnswers);
+  //Seconds Counter
+  const [counter, setCounter] = React.useState(8);
+  React.useEffect(() => {
+    if (counter === 0) {
+      setView("grid");
+    }
+    const timer =
+      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+    return () => clearInterval(timer);
+  }, [counter]);
+
   const classes = useStyles();
 
   // Durstenfeld shuffle, an optimized version of Fisher-Yates algorithm
@@ -38,9 +50,12 @@ export default function QuestionCard(props) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
+      console.log(array[i], array[j]);
     }
-    return array
+    return array;
   }
+
+  console.log(randomAnswers);
 
   const multipleChoice = [
     <Button onClick={correctAnswer} variant="contained">
@@ -51,17 +66,29 @@ export default function QuestionCard(props) {
     </Button>,
     <Button onClick={wrongAnswer} variant="contained">
       {randomAnswers[1]}
-    </Button>
-  ]
+    </Button>,
+  ];
 
   return (
-    <Box className={classes.main} onClick={() => setView('grid')}>
-      <Box className={`${classes.question} ${classes.main}`} >
+    <Box className={classes.main} onClick={() => setView("grid")}>
+      <Box className={`${classes.question} ${classes.main}`}>
         <h1>{clue.question}</h1>
+        <div>Countdown: {counter}</div>
       </Box>
-      <div style={{ height: '24vh', width: '100%', display: 'flex', flexflow: 'row wrap', justifyContent: 'space-around', alignItems: 'flex-start' }}>
+      <div
+        style={{
+          height: "24vh",
+          width: "100%",
+          display: "flex",
+          flexflow: "row wrap",
+          justifyContent: "space-around",
+          alignItems: "flex-start",
+        }}
+      >
         {shuffleArray(multipleChoice)}
       </div>
     </Box>
-  )
-}
+  );
+});
+
+export default QuestionCard;
