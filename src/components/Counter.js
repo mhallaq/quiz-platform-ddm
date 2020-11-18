@@ -1,40 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Track = styled.div`
   height: 20px;
   margin: 0 auto;
-  border: 1px solid #ccc;
-  background-color: #222;
-  box-shadow: inset 0 0 5px #000;
+  background-color: #e0e0e0;
 `;
 
 const Thumb = styled.div`
-  width: ${(props) => props.percentage}%;
+  width: ${100/9}%;
   height: 100%;
   background-color: #cc1414;
   transition: width 0.3s ease-in;
+  margin: .5rem;
+  height: 1rem;
 `;
 
 const Counter = (props) => {
-  const { setView } = props;
+  const { setView, wrongAnswer } = props;
   //Seconds Counter
-  const [counter, setCounter] = React.useState(8); // counter is 8 seconds
-  const [percentage, setPercentage] = useState(0);
+  const [counter, setCounter] = React.useState(11); // counter is 8 seconds
+  const thumbs = React.useMemo(() => [
+    <Thumb />,
+    <Thumb />,
+    <Thumb />,
+    <Thumb />,
+    <Thumb />,
+    <Thumb />,
+    <Thumb />,
+    <Thumb />,
+    <Thumb />,
+  ],[])
+
+  console.log(counter)
 
   React.useEffect(() => {
-    if (counter === 0) {
+    if (counter <= 0) {
       setView("grid");
+      wrongAnswer()
     }
-    const timer =
-      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    setPercentage(100 - (counter / 8) * 100);
+    const timer = counter > 0 && setInterval(() => {
+      setCounter(counter => counter - 2)
+      thumbs.splice(0, 2)
+    }, 2000);
+
+    
     return () => clearInterval(timer);
-  }, [counter, percentage]);
+  }, [counter, setView, thumbs, wrongAnswer]);
+
   return (
     <>
-      <Track>
-        <Thumb percentage={percentage} />
+      <Track style={{ display: 'flex', justifyContent: 'center', height: "2rem" }}>
+        {thumbs}
       </Track>
     </>
   );

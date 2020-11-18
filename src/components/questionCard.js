@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "900",
   },
   question: {
-    height: "70vh",
+    height: "60vh",
     width: "80%",
   },
   answerRow: {
@@ -29,9 +29,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   countdown: {
-    height: "10vh",
+    height: "2rem",
     // width: "80vw",
     margin: "auto",
+    // paddingTop: "5vh",
+    paddingBottom: "5vh"
+
   },
 }));
 
@@ -56,15 +59,17 @@ const QuestionCard = (props) => {
     return array;
   }, []);
 
+
+
   const multipleChoice = [
     <Button onClick={correctAnswer} variant="contained">
-      {clue.answer}
+      <p dangerouslySetInnerHTML={{__html: clue.answer}}/>
     </Button>,
     <Button onClick={wrongAnswer} variant="contained">
-      {randomAnswers[0]}
+      <p dangerouslySetInnerHTML={{ __html: randomAnswers[0] }}/>
     </Button>,
     <Button onClick={wrongAnswer} variant="contained">
-      {randomAnswers[1]}
+      <p dangerouslySetInnerHTML={{ __html: randomAnswers[1] }}/>
     </Button>,
   ];
 
@@ -72,7 +77,7 @@ const QuestionCard = (props) => {
     <Box className={classes.main} onClick={() => setView("grid")}>
       <Box className={classes.countdown}>
         <CounterBarContainer>
-          <Counter setView={setView} />
+          <Counter setView={setView} wrongAnswer={wrongAnswer}/>
         </CounterBarContainer>
       </Box>
       <Box className={`${classes.question} ${classes.main}`}>
@@ -88,6 +93,7 @@ const QuestionCard = (props) => {
           alignItems: "flex-start",
         }}
       >
+
         {shuffleArray(multipleChoice)}
       </div>
     </Box>
