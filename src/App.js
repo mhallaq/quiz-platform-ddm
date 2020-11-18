@@ -6,10 +6,11 @@ import QuestionCard from './components/questionCard'
 import LandingPage from './components/landingPage'
 import Header from './components/Header'
 import { fetchRand } from './services/apiConfig'
+import WagerScreen from './components/WagerScreen'
 
 function App() {
   const [board, setBoard] = useState()
-  const [view, setView] = useState('landing')
+  const [view, setView] = useState('wager')
   const [col, setColumn] = useState()
   const [row, setRow] = useState()
   const [history, setHistory]= useState([
@@ -22,7 +23,7 @@ function App() {
   ])
 
   const [questionValue, setQuestionValue] = useState()
-  const [bank, setBank] = useState(0)
+  const [bank, setBank] = useState(201)
   const [randomAnswers, setRandomAnswers] = useState()
 
   useEffect( () => {
@@ -82,6 +83,9 @@ function App() {
         wrongAnswer={wrongAnswer}
         randomAnswers={[randomAnswers[randIdx], randomAnswers[randIdx+1]]}
       />
+    )
+    if (view === 'wager') return (
+      <WagerScreen bank={bank} setBank={setBank} />
     )
   }
 
