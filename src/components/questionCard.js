@@ -30,27 +30,37 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function QuestionCard(props) {
-
-  const { clue, setView, correctAnswer, wrongAnswer } = props
-
-
+  const { clue, setView, correctAnswer, wrongAnswer, randomAnswers } = props
   const classes = useStyles();
+
+  // Durstenfeld shuffle, an optimized version of Fisher-Yates algorithm
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
+  }
+
+  const multipleChoice = [
+    <Button onClick={correctAnswer} variant="contained">
+      {clue.answer}
+    </Button>,
+    <Button onClick={wrongAnswer} variant="contained">
+      {randomAnswers[0]}
+    </Button>,
+    <Button onClick={wrongAnswer} variant="contained">
+      {randomAnswers[1]}
+    </Button>
+  ]
 
   return (
     <Box className={classes.main} onClick={() => setView('grid')}>
       <Box className={`${classes.question} ${classes.main}`} >
         <h1>{clue.question}</h1>
       </Box>
-      <div style={{ width: '100%', display: 'flex', flexflow: 'row wrap', justifyContent: 'space-around' }}>
-        <Button onClick={correctAnswer} variant="contained">
-          {clue.answer}
-        </Button>
-        <Button onClick={wrongAnswer} variant="contained">
-          Wrong Answer
-      </Button>
-        <Button onClick={wrongAnswer}variant="contained">
-          Wrong Answer
-      </Button>
+      <div style={{ height: '24vh', width: '100%', display: 'flex', flexflow: 'row wrap', justifyContent: 'space-around', alignItems: 'flex-start' }}>
+        {shuffleArray(multipleChoice)}
       </div>
     </Box>
   )
