@@ -4,7 +4,7 @@ const URL = "https://jservice.io/api/"
 
 const CATEGORIES_URL = URL + "categories?count=6&offset=" + Math.random() * 1000
 const CLUES_URL = URL + "clues?category="
-const RAND_URL = URL + "random"
+const RAND_URL = URL + "random?count=100"
 
 
 
@@ -26,11 +26,27 @@ export const fetchClues = async (category_id) => {
     }
 }
 
-export const fetchRand = async () => {
+
+export const fetchRand = async (setRandomAnswers) => {
     try {
-        const response = await axios.get(RAND_URL)
-        return response.data
+        const response = await makeGetRequest()
+        const answerArray = response.map(item => item.answer)
+        return answerArray
     } catch (error) {
         throw error
     }
 }
+
+function makeGetRequest() { 
+    return new Promise(function (resolve, reject) { 
+        axios.get(RAND_URL).then( 
+            (response) => { 
+                const result = response.data; 
+                resolve(result); 
+            }, 
+                (error) => { 
+                reject(error); 
+            } 
+        ); 
+    }); 
+} 

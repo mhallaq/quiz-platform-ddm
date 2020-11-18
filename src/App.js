@@ -5,6 +5,7 @@ import createBoard from './services/createBoard'
 import QuestionCard from './components/questionCard'
 import LandingPage from './components/landingPage'
 import Header from './components/Header'
+import { fetchRand } from './services/apiConfig'
 
 function App() {
   const [board, setBoard] = useState()
@@ -22,8 +23,12 @@ function App() {
 
   const [questionValue, setQuestionValue] = useState()
   const [bank, setBank] = useState(0)
+  const [randomAnswers, setRandomAnswers] = useState()
 
-  useEffect(() => createBoard(setBoard), [])
+  useEffect(async () => {
+    createBoard(setBoard)
+    setRandomAnswers(await fetchRand())
+  }, [])
 
   const itemClick = (col, row, value) => {
     setColumn(col)
@@ -35,6 +40,8 @@ function App() {
       return [...prevHistory];
     })
   }
+
+  const randIdx = Math.floor(Math.random() * 98)
 
   const correctAnswer = () => {
     setBank(bank + questionValue)
@@ -59,11 +66,13 @@ function App() {
     )
     if (view === 'question') return (
       <QuestionCard
+        
         clue={board[col].clues[row]}
         setView={setView}
         setQuestionValue={setQuestionValue}
         correctAnswer={correctAnswer}
         wrongAnswer={wrongAnswer}
+        randomAnswers={[randomAnswers[randIdx], randomAnswers[randIdx+1]]}
       />
     )
   }
@@ -71,7 +80,7 @@ function App() {
   return (
 
     <div className="App ">
-      <div className="gradient-background">
+      <div className="gradient-background" style={{display: 'flex', flexFlow: 'column nowrap', alignContent: 'flex-end'}}>
         <Header bank={bank} setBank={setBank} />
         {renderMain()}
       </div>
