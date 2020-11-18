@@ -40,7 +40,7 @@ function App() {
 
   useEffect(() => {
     createBoard(setBoard);
-
+    setRound(1)
     async function getWrongAnswers() {
       setRandomAnswers(await fetchRand());
     }

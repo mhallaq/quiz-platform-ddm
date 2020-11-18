@@ -1,5 +1,4 @@
 import React from 'react'
-import WagerBar from './WagerBar'
 
 export default function Header(props) {
     const { bank } = props
@@ -10,7 +9,6 @@ export default function Header(props) {
             <div style={{  height: '100%' }}>
                 <h1 className='logo' style={{color: `${balanceColor}`}}>SCORE: ${bank}</h1>
             </div>
-            {/* <WagerBar /> */}
 
         </div>
     )
