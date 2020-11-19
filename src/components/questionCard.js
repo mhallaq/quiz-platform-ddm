@@ -3,8 +3,8 @@ import React from "react";
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Counter from "./Counter";
-import styled from "styled-components";
+//import Counter from "./Counter";
+//import styled from "styled-components";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -46,13 +46,13 @@ const useStyles = makeStyles((theme) => ({
 
 //Styling Counter bar
 
-const CounterBarContainer = styled.div`
-  width: 100vw;
-  margin: 0 auto;
-`;
+// const CounterBarContainer = styled.div`
+//   width: 100vw;
+//   margin: 0 auto;
+// `;
 
 const QuestionCard = (props) => {
-  const { clue, setView, correctAnswer, wrongAnswer, randomAnswers, shuffleArray } = props;
+  const { clue, correctAnswer, wrongAnswer, randomAnswers, shuffleArray } = props;
 
   const classes = useStyles();
 
@@ -78,11 +78,11 @@ const QuestionCard = (props) => {
 
   return (
     <Box className={classes.main}>
-      <Box className={classes.countdown}>
+      {/* <Box className={classes.countdown}>
         <CounterBarContainer>
-          <Counter setView={setView} wrongAnswer={wrongAnswer}/>
+          <Counter wrongAnswer={wrongAnswer}/>
         </CounterBarContainer>
-      </Box>
+      </Box> */}
       <Box className={`${classes.question}`}>
         <h1>{clue.question}</h1>
       </Box>
