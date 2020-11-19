@@ -28,8 +28,10 @@ const useStyles = makeStyles(theme => ({
 export default function AnnouncementPage(props) {
 
   const {setView, text, next, time} = props
-  const [timer, setTimer] = React.useState(time !==undefined ? time : 1)
+  const [timer, setTimer] = React.useState(time)
   const classes = useStyles();
+
+
 
   React.useEffect(() => {
     const counter = setInterval(() => countdown(), 1000);
@@ -42,6 +44,10 @@ export default function AnnouncementPage(props) {
     }
     setTimer(timer - 1)
   }
+
+  React.useEffect(() => {
+    setTimer(time)
+  }, [time]);
 
   return (
     <Box className={classes.main} >

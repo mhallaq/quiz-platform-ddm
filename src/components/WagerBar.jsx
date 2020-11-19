@@ -12,7 +12,7 @@ ValueLabelComponent.propTypes = {
 };
 
 function ValueLabelComponent(props) {
-    
+
     return (
         // <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
         //     {children}
@@ -56,7 +56,6 @@ export default function CustomizedSlider(props) {
     const { betValue, setBetValue, percentage, setPercentage, maxBet } = props
 
     const sliderUpdate = (value) => {
-        console.log(value)
         setPercentage(value)
         console.log(Math.ceil((maxBet / 100) * value))
         setBetValue(Math.ceil((maxBet / 100) * value))

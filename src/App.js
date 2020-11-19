@@ -35,10 +35,13 @@ function App() {
   const [roundTimer, setRoundTimer] = useState(-1)
   const [maxBet, setMaxBet] = useState(0);
   const [questionCounter, setQuestionCounter] = useState(0)
-  const roundLength = 180;
+  const roundLength = 10;
 
   const setEndView = useCallback(() => {
     if (bank > 0) {
+      setRound(3)
+      setColumn(0)
+      setRow(4)
       setView("finalRound")
     }
     else {
@@ -51,7 +54,7 @@ function App() {
       setDailyDouble([[Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)], [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]])
       setView("secondRound")
       setRoundTimer(roundLength)//time second round
-      setRound(round + 1)
+      setRound(2)
       setQuestionCounter(0)
       setHistory([
         [true, true, true, true, true],
@@ -122,6 +125,7 @@ function App() {
     }
     getWrongAnswers();
     setRound(1)
+    setBank(0)
     setHistory([
       [true, true, true, true, true],
       [true, true, true, true, true],
@@ -142,22 +146,30 @@ function App() {
 
   const correctAnswer = () => {
     document.getElementById("correct-sound").play();
-    setView('grid')
     setQuestionCounter(questionCounter + 1)
     setTimeout(() => {
       setBank(bank + questionValue);
     }, 500);
     reduceWrongAnswers()
+    if (round===3){
+      setView('win')
+    }else{
+      setView('grid')
+    }
   };
 
   const wrongAnswer = () => {
     document.getElementById("wrong-sound").play();
-    setView('grid')
     setQuestionCounter(questionCounter+1)
     setTimeout(() => {
       setBank(bank - questionValue);
     }, 500);
     reduceWrongAnswers()
+    if (round === 3) {
+      setView('win')
+    } else {
+      setView('grid')
+    }
   };
 
   const reduceWrongAnswers = () =>{
@@ -195,20 +207,23 @@ function App() {
       />
     )}
     if (view==='dailyDouble') return (
-      <AnnouncementPage text="Daily Double!" setView={setView} next='wager'/>
+      <AnnouncementPage text="Daily Double!" setView={setView} next='wager' time={2}/>
     )
     if (view === 'secondRound') return (
-      <AnnouncementPage text="Double Jeopardy!" setView={setView} next='grid' />
+      <AnnouncementPage text="Double Jeopardy!" setView={setView} next='grid' time={2} />
     )
     if (view === 'finalRound') return (
-      <AnnouncementPage text="Final Jeopardy" setView={setView} next='wager' time={3} />
+      <AnnouncementPage text="Final Jeopardy" setView={setView} next='finalRoundCategory' time={2} />
+    )
+    if (view === 'finalRoundCategory') return (
+      <AnnouncementPage text={`Category: ${board[2][0].title}`} setView={setView} next='wager' time={3} />
     )
     if (view === 'wager') return (
       <>
         <WagerScreen bank={bank} setBank={setBank} round={round} maxBet={maxBet && maxBet} setQuestionValue={setQuestionValue} setView={setView} />
       </>
     )
-    if(view ==="gameOver")return (
+    if(view ==="gameOver") return (
       <>
         <EndGame mode="fail" setView={setView} reset={reset}/>
       </>
