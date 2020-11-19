@@ -66,7 +66,7 @@ function App() {
       setEndView()
     }
     }
-  }, [round, setEndView,bank])
+  }, [round, setEndView])
 
 
   useEffect(() => {
