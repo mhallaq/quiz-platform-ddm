@@ -17,7 +17,7 @@ import EndGame from './components/endGame'
 function App() {
   const [board, setBoard] = useState()
   const [boardOffset, setBoardOffset] = useState(1)
-  const [view, setView] = useState('gameOver')
+  const [view, setView] = useState('landing')
   const [round, setRound] = useState(1)
   const [col, setColumn] = useState()
   const [row, setRow] = useState()
@@ -36,7 +36,7 @@ function App() {
   const [roundTimer, setRoundTimer] = useState(-1)
   const [maxBet, setMaxBet] = useState(0);
   const [questionCounter, setQuestionCounter] = useState(0)
-  const roundLength = 6;
+  const roundLength = 60;
 
 
   const setEndView = useCallback(() => {
