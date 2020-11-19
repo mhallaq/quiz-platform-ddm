@@ -26,8 +26,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function AnnouncementPage(props) {
 
-  const {setView, text, next} = props
-  const [timer, setTimer] = React.useState(1)
+  const {setView, text, next, time} = props
+  const [timer, setTimer] = React.useState(time !==undefined ? time : 1)
   const classes = useStyles();
 
   React.useEffect(() => {

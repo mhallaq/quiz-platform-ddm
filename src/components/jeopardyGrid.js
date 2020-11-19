@@ -33,13 +33,13 @@ export default function JeopardyGrid(props) {
   return (
     <Grid container direction="row" className={classes.main}>
       {board &&
-        board[round].map((column, index) => {
+        board[round-1].map((column, index) => {
           const taken = props.history[index];
 
           return (
-            <Grid key={index} xs={2} container direction="column" item>
+            <Grid key={index} md={2} container direction="column" item>
               <Box className={`${classes.item} ${classes.title}`}>
-                <h2>{column.title}</h2>
+                <h3>{column.title}</h3>
               </Box>
               <Box
                 className={`${classes.item} ${classes.question}`}
