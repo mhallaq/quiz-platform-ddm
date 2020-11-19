@@ -78,11 +78,11 @@ const QuestionCard = (props) => {
 
   return (
     <Box className={classes.main}>
-      {/* <Box className={classes.countdown}>
+      <Box className={classes.countdown}>
         <CounterBarContainer>
           <Counter setView={setView} wrongAnswer={wrongAnswer}/>
         </CounterBarContainer>
-      </Box> */}
+      </Box>
       <Box className={`${classes.question}`}>
         <h1>{clue.question}</h1>
       </Box>
