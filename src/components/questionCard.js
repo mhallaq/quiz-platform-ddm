@@ -8,6 +8,7 @@ import styled from "styled-components";
 
 const useStyles = makeStyles((theme) => ({
   main: {
+    marginTop: '8vh',
     fontFamily: "KorinnaBold",
     alignItems: "center",
     justifyContent: "center",
@@ -18,10 +19,15 @@ const useStyles = makeStyles((theme) => ({
     color: "#FFFFFF",
     "-webkit-text-stroke": "1px black",
     fontWeight: "900",
+    outline: "black solid 1px",
   },
   question: {
     height: "60vh",
     width: "80%",
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+    flexFlow: "column nowrap",
   },
   answerRow: {
     height: "150px",
@@ -72,12 +78,12 @@ const QuestionCard = (props) => {
 
   return (
     <Box className={classes.main}>
-      <Box className={classes.countdown}>
+      {/* <Box className={classes.countdown}>
         <CounterBarContainer>
           <Counter setView={setView} wrongAnswer={wrongAnswer}/>
         </CounterBarContainer>
-      </Box>
-      <Box className={`${classes.question} ${classes.main}`}>
+      </Box> */}
+      <Box className={`${classes.question}`}>
         <h1>{clue.question}</h1>
       </Box>
       <div

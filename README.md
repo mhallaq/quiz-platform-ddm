@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+Jeopardy! Fan Edition
+=======
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A hackathon complete for the [MintBean Quiz Platform Hackathon](https://sites.google.com/mintbean.io/mbjavascripthackshackthequizpl/home)
 
-## Available Scripts
+Participants
+------
+[David Diep](https://github.com/david-diep)
 
-In the project directory, you can run:
+[Dan Dalgatov](https://github.com/dandalgatov)
 
-### `yarn start`
+[Mohammad Al Hallaq](https://github.com/mhallaq)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Live Demo
+======
+[https://confident-kilby-f1fa10.netlify.app/](https://confident-kilby-f1fa10.netlify.app/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Features
+=======
+- As a user, When the page loads a landing page asking if I want to play
 
-### `yarn test`
+- As a user, When Click play a game board appears
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- As a user, When I look at the game board I see 6 columns each with
 
-### `yarn build`
+  A category
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  5 questions with increasing point values
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- As a user, when I click on a point value I will be asked a question
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- As a user, once the question has been asked I can see a timer showing me the time I have to answer a question
 
-### `yarn eject`
+- As a user, If I fail to answer a question in the given time the question will close and my score will be unaffected
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- As a user, If I answer a question correctly my score will be increased by the point value on the on the question selected
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- As a user, If I answer a question incorrectly my score will be decreased by the point value on the questions selected
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- As a user, After a unseen period of time the game will start the next round
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- As a user, at the start of the 2nd round the game board is refilled and I continue like the first round
 
-## Learn More
+- As a user, at the start of the third round I am given a question and asked to wager from my earned points
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- As a user, if I answer the third round question correctly I gain the value of my wager
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- As a user, if I answer the third round question incorrectly I lose the value of my wager
 
-### Code Splitting
+- As a user, after the third round I am shown my score and asked if I want to play again
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Development
+======
 
-### Analyzing the Bundle Size
+System Requirements
+------
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Node.js 10 or higher
 
-### Making a Progressive Web App
+- npm 6 or higher
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Technologies Used
+------
+- React
+- Material UI
+- Axios
 
-### Advanced Configuration
+### Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+1. Clone this repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```shell
+git clone https://github.com/mhallaq/quiz-platform-ddm
+cd quiz-platform-dmm
+```
+2. Install dependencies with NPM
 
-### `yarn build` fails to minify
+```shell
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. Start the project.  It can be view at [http://localhost:3000/](http://localhost:3000/) in the browser
+
+```shell
+npm run start
+```

@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   main: {
+    marginTop: '8vh',
     fontFamily: "KorinnaBold",
     alignItems: "center",
     justifyContent: "center",
