@@ -16,7 +16,7 @@ import EndGame from './components/endGame'
 
 function App() {
   const [board, setBoard] = useState()
-  const [view, setView] = useState('landing')
+  const [view, setView] = useState('gameOver')
   const [round, setRound] = useState(1)
   const [col, setColumn] = useState()
   const [row, setRow] = useState()
@@ -35,7 +35,7 @@ function App() {
   const [roundTimer, setRoundTimer] = useState(-1)
   const [maxBet, setMaxBet] = useState(0);
   const [questionCounter, setQuestionCounter] = useState(0)
-  const roundLength = 60;
+  const roundLength = 6;
 
   console.log(roundTimer)
 
@@ -171,7 +171,9 @@ function App() {
       setBank(bank - questionValue);
     }, 500);
     reduceWrongAnswers()
-    if (round === 3) {
+    if (round === 3 && bank - questionValue <= 0) {
+      setView('gameOver')
+    } else if(round === 3) {
       setView('win')
     } else {
       setView('grid')
