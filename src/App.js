@@ -16,7 +16,7 @@ import EndGame from './components/endGame'
 
 function App() {
   const [board, setBoard] = useState()
-  const [view, setView] = useState('gameOver')
+  const [view, setView] = useState('landing')
   const [round, setRound] = useState(1)
   const [col, setColumn] = useState()
   const [row, setRow] = useState()
@@ -108,9 +108,30 @@ function App() {
     }
   }
 
+  const reset = () => {
+    createBoard(setBoard);
+    async function getWrongAnswers() {
+      setRandomAnswers(await fetchRand());
+    }
+    getWrongAnswers();
+    setRound(1)
+    setHistory([
+      [true, true, true, true, true],
+      [true, true, true, true, true],
+      [true, true, true, true, true],
+      [true, true, true, true, true],
+      [true, true, true, true, true],
+      [true, true, true, true, true],
+    ]);
+  }
 
-
-  const randIdx = Math.floor(Math.random() * 98);
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 
   const correctAnswer = () => {
     document.getElementById("correct-sound").play();
@@ -119,6 +140,7 @@ function App() {
     setTimeout(() => {
       setBank(bank + questionValue);
     }, 500);
+    reduceWrongAnswers()
   };
 
   const wrongAnswer = () => {
@@ -128,9 +150,16 @@ function App() {
     setTimeout(() => {
       setBank(bank - questionValue);
     }, 500);
+    reduceWrongAnswers()
   };
 
-
+  const reduceWrongAnswers = () =>{
+    setRandomAnswers((prevAnswers)=>{
+      prevAnswers.pop()
+      prevAnswers.pop()
+      return [...prevAnswers]
+    })
+  }
 
   const renderMain = () => {
     if (view === "landing") {
@@ -145,17 +174,19 @@ function App() {
         round={round}/>
     )
 
-    if (view === 'question') return (
+    if (view === 'question'){
+      return (
       <QuestionCard
         round={round}
         setView={setView}
         clue={board[round-1][col].clues[row]}
         setQuestionValue={setQuestionValue}
         correctAnswer={correctAnswer}
+        shuffleArray={shuffleArray}
         wrongAnswer={wrongAnswer}
-        randomAnswers={[randomAnswers[randIdx], randomAnswers[randIdx+1]]}
+        randomAnswers={[randomAnswers[randomAnswers.length - 1], randomAnswers[randomAnswers.length-2]]}
       />
-    )
+    )}
     if (view==='dailyDouble') return (
       <AnnouncementPage text="Daily Double!" setView={setView} next='wager'/>
     )
@@ -170,12 +201,12 @@ function App() {
         <WagerScreen bank={bank} setBank={setBank} round={round} maxBet={maxBet && maxBet} setQuestionValue={setQuestionValue} setView={setView} />
       </>
     )
-    if(view=="gameOver")return (
+    if(view ==="gameOver")return (
       <>
         <EndGame mode="fail" setView={setView}/>
       </>
     )
-    if (view == "win") return (
+    if (view === "win") return (
       <>
         <EndGame setView={setView} score={bank} />
       </>
