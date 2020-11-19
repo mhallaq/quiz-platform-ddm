@@ -66,6 +66,10 @@ function App() {
         [true, true, true, true, true],
         [true, true, true, true, true],
       ]);
+      async function getWrongAnswers() {
+        setRandomAnswers(await fetchRand());
+      }
+      getWrongAnswers()
     } else {
     if (round===2){
       setEndView()
@@ -176,7 +180,6 @@ function App() {
 
   const reduceWrongAnswers = () =>{
     setRandomAnswers((prevAnswers)=>{
-      prevAnswers.pop()
       prevAnswers.pop()
       return [...prevAnswers]
     })
