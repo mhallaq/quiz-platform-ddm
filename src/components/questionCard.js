@@ -76,7 +76,7 @@ const QuestionCard = (props) => {
 
 
   return (
-    <Box className={classes.main} onClick={() => setView("grid")}>
+    <Box className={classes.main}>
       <Box className={classes.countdown}>
         <CounterBarContainer>
           <Counter setView={setView} wrongAnswer={wrongAnswer}/>

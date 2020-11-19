@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import JeopardyGrid from "./components/jeopardyGrid";
 import "./App.css";
 import createBoard from './services/createBoard'
@@ -33,11 +33,36 @@ function App() {
   const [randomAnswers, setRandomAnswers] = useState()
   const [roundTimer, setRoundTimer] = useState(-1)
   const [maxBet, setMaxBet] = useState(0);
+  const [questionCounter, setQuestionCounter] = useState(0)
+  const roundLength = 180;
+
+  const nextRound = useCallback(() => {
+    if (round === 1) {
+      setDailyDouble([[Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)], [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]])
+      setView("secondRound")
+      setRoundTimer(roundLength)//time second round
+      setRound(round + 1)
+      setQuestionCounter(0)
+      setHistory([
+        [true, true, true, true, true],
+        [true, true, true, true, true],
+        [true, true, true, true, true],
+        [true, true, true, true, true],
+        [true, true, true, true, true],
+        [true, true, true, true, true],
+      ]);
+
+    } else {
+      setView("finalRound")
+    }
+  },[round])
 
 
-
-
-
+  useEffect(() => {
+    if(questionCounter===30){
+      nextRound()
+    }
+  },[questionCounter, nextRound]);
 
   useEffect(() => {
     createBoard(setBoard);
@@ -49,26 +74,7 @@ function App() {
 
   useEffect(()=>{
     const countdown = setInterval(()=>{
-      const nextRound = () => {
-        if (round === 1) {
-          setDailyDouble([[Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)], [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]])
-          setView("secondRound")
-          setRoundTimer(180)//time second round
-          setRound(round + 1)
-          setHistory([
-            [true, true, true, true, true],
-            [true, true, true, true, true],
-            [true, true, true, true, true],
-            [true, true, true, true, true],
-            [true, true, true, true, true],
-            [true, true, true, true, true],
-          ]);
 
-        } else {
-          setView("finalRound")
-        }
-
-      }
 
       setRoundTimer(roundTimer-1)
       if(roundTimer===0){
@@ -103,6 +109,7 @@ function App() {
   const correctAnswer = () => {
     document.getElementById("correct-sound").play();
     setView('grid')
+    setQuestionCounter(questionCounter + 1)
     setTimeout(() => {
       setBank(bank + questionValue);
     }, 500);
@@ -111,6 +118,7 @@ function App() {
   const wrongAnswer = () => {
     document.getElementById("wrong-sound").play();
     setView('grid')
+    setQuestionCounter(questionCounter+1)
     setTimeout(() => {
       setBank(bank - questionValue);
     }, 500);
@@ -120,7 +128,7 @@ function App() {
 
   const renderMain = () => {
     if (view === "landing") {
-      return <LandingPage setView={setView} start={() => setRoundTimer(180)}/>;
+      return <LandingPage setView={setView} start={() => setRoundTimer(roundLength)}/>;
     }
 
     if (view === 'grid') return (
@@ -149,7 +157,7 @@ function App() {
       <AnnouncementPage text="Double Jeopardy!" setView={setView} next='grid' />
     )
     if (view === 'finalRound') return (
-      <AnnouncementPage text="Final Jeopardy" setView={setView} next='wager' />
+      <AnnouncementPage text="Final Jeopardy" setView={setView} next='wager' time={3} />
     )
   if (view === 'wager') return (
     <>
