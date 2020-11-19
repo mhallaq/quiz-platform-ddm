@@ -8,11 +8,11 @@ const Track = styled.div`
 `;
 
 const Thumb = styled.div`
-  width: ${100/9}%;
+  width: ${100 / 9}%;
   height: 100%;
   background-color: #cc1414;
   transition: width 0.3s ease-in;
-  margin: .5rem;
+  margin: 0.5rem;
   height: 1rem;
 `;
 
@@ -20,37 +20,55 @@ const Counter = (props) => {
   const { setView, wrongAnswer } = props;
   //Seconds Counter
   const [counter, setCounter] = React.useState(11); // counter is 11 seconds
-  const thumbs = React.useMemo(() => [
-    <Thumb />,
-    <Thumb />,
-    <Thumb />,
-    <Thumb />,
-    <Thumb />,
-    <Thumb />,
-    <Thumb />,
-    <Thumb />,
-    <Thumb />,
-  ],[])
+  const [percentage, setPercentage] = React.useState(0);
 
-  console.log(counter)
+  const thumbs = React.useMemo(
+    () => [
+      <Thumb />,
+      <Thumb />,
+      <Thumb />,
+      <Thumb />,
+      <Thumb />,
+      <Thumb />,
+      <Thumb />,
+      <Thumb />,
+      <Thumb />,
+    ],
+    []
+  );
+
+  // console.log(counter);
 
   React.useEffect(() => {
     if (counter <= 0) {
       setView("grid");
-      wrongAnswer()
+      wrongAnswer();
     }
-    const timer = counter > 0 && setInterval(() => {
-      setCounter(counter => counter - 2)
-      thumbs.splice(0, 2)
-    }, 2000);
+    const timer =
+      counter > 0 &&
+      setInterval(() => {
+        setCounter(counter - 2);
+        thumbs.splice(0, 2);
+      }, 2000);
 
-    
     return () => clearInterval(timer);
-  }, [counter, setView, thumbs, wrongAnswer]);
+  }, [counter, thumbs]);
+
+  // React.useEffect(() => {
+  //   if (counter === 0) {
+  //     setView("grid");
+  //   }
+  //   const timer =
+  //     counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+  //   setPercentage(100 - (counter / 8) * 100);
+  //   return () => clearInterval(timer);
+  // }, [counter /*percentage*/, , setView, thumbs, wrongAnswer]);
 
   return (
     <>
-      <Track style={{ display: 'flex', justifyContent: 'center', height: "2rem" }}>
+      <Track
+        style={{ display: "flex", justifyContent: "center", height: "2rem" }}
+      >
         {thumbs}
       </Track>
     </>
