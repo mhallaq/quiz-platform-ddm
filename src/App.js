@@ -34,7 +34,11 @@ function App() {
   const [roundTimer, setRoundTimer] = useState(-1)
   const [maxBet, setMaxBet] = useState(0);
   const [questionCounter, setQuestionCounter] = useState(0)
-  const roundLength = 180;
+  const roundLength = 18;
+
+  console.log(roundTimer)
+  console.log(round)
+  console.log(view)
 
   const nextRound = useCallback(() => {
     if (round === 1) {
@@ -59,12 +63,14 @@ function App() {
 
 
   useEffect(() => {
+    // console.log('Im refreshing')
     if(questionCounter===30){
       nextRound()
     }
-  },[questionCounter, nextRound]);
+  },);
 
   useEffect(() => {
+    // console.log('Im refreshing')
     createBoard(setBoard);
     async function getWrongAnswers() {
       setRandomAnswers(await fetchRand());
@@ -72,18 +78,19 @@ function App() {
     getWrongAnswers();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     const countdown = setInterval(()=>{
-
-
       setRoundTimer(roundTimer-1)
       if(roundTimer===0){
         nextRound();
       }
-
     },1000)
     return ()=>clearInterval(countdown);
-  })
+  },)
+
+
+  
+  
 
   const itemClick = (col, row, value) => {
     setColumn(col)

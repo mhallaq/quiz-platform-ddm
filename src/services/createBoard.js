@@ -20,7 +20,8 @@ const createBoard = async (setBoard) => {
     Promise.all(categories).then(result =>  {
         const board1=result.slice(0,6)
         const board2 = result.slice(6, 12)
-        setBoard( [board1,board2] )})
+        const board3 = result.slice(12, 13)
+        setBoard( [board1,board2,board3] )})
 }
 
 export default createBoard

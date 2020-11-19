@@ -45,13 +45,15 @@ const CounterBarContainer = styled.div`
   margin: 0 auto;
 `;
 
+console.log('refreshing questions')
+
 const QuestionCard = (props) => {
   const { clue, setView, correctAnswer, wrongAnswer, randomAnswers } = props;
 
   const classes = useStyles();
 
   // Durstenfeld shuffle, an optimized version of Fisher-Yates algorithm
-  const shuffleArray = useCallback((array) => {
+  const shuffleArray = ((array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -96,7 +98,8 @@ const QuestionCard = (props) => {
         }}
       >
 
-        {shuffleArray(multipleChoice)}
+        {/* {shuffleArray(multipleChoice)} */}
+        {multipleChoice}
       </div>
     </Box>
   );
