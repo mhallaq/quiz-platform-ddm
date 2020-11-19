@@ -35,7 +35,7 @@ function App() {
   const [roundTimer, setRoundTimer] = useState(-1)
   const [maxBet, setMaxBet] = useState(0);
   const [questionCounter, setQuestionCounter] = useState(0)
-  const roundLength = 10;
+  const roundLength = 180;
 
   const setEndView = useCallback(() => {
     if (bank > 0) {
