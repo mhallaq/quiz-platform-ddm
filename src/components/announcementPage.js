@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   main: {
-    marginTop: '8vh',
+    // marginTop: '8vh',
     fontFamily: 'KorinnaBold',
     alignItems: 'center',
     justifyContent: "center",
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: '900',
   },
   question: {
-    height: '85vh',
+    height: '100vh',
     width: "80%",
     fontSize: "2.1rem"
   },

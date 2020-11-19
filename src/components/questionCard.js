@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    marginTop: '8vh',
+    // marginTop: '8vh',
     fontFamily: "KorinnaBold",
     alignItems: "center",
     justifyContent: "center",
