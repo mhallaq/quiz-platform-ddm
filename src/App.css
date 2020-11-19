@@ -5,11 +5,26 @@
 
 
 .header {
+  position:fixed;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
   height: 4rem;
+   top: 0;
+  width: 100%;
+
+}
+
+@media only screen and (max-width: 700px) {
+  .header {
+  height: 7vh;
+  background:inherit;
+  font-size: 2rem;
+}
+.logo{
+  font-size: 2rem !important;
+}
 }
 
 .App-link {
@@ -38,5 +53,3 @@
   font-size: 1rem;
   margin: 0;
 }
-
-

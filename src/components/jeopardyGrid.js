@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid black",
     flexGrow: 1,
     minHeight: "500px",
+    paddingTop:'7vh',
   },
   item: {
     fontFamily: "Swiss911",

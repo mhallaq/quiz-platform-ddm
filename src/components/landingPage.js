@@ -3,6 +3,7 @@ import alexTrebek from '../public/images/alex_trebek_clean.png'
 
 const useStyles = makeStyles(theme => ({
   main: {
+    paddingTop: '7vh',
     alignItems: 'center',
     display: "flex",
     flexDirection: 'column',
@@ -82,7 +83,20 @@ export default function LandingPage(props) {
             <h1>Play</h1>
           </Button>
           <Container>
-            <h2>Made By: </h2>
+            <h2>Made By: <br></br>
+            David Diep <br></br>
+            (<a href="https://github.com/david-diep" target="__blank">GitHub</a> | <a href="https://www.linkedin.com/in/david-diep-dev/" target="__blank">LinkedIn</a>)
+            </h2>
+            <h2>
+              Dan Dalgatov <br></br>
+              (<a href="https://github.com/dandalgatov" target="__blank">GitHub</a> | <a href="https://www.linkedin.com/in/dandalgatov/" target="__blank">LinkedIn</a>)
+
+            </h2>
+            <h2>
+              Mohammad Al Hallaq <br></br>
+              (<a href="https://github.com/mhallaq" target="__blank">GitHub</a> | <a href="https://www.linkedin.com/in/mohallaq/" target="__blank">LinkedIn</a>)
+            </h2>
+
           </Container>
         </Grid>
       </Grid>
