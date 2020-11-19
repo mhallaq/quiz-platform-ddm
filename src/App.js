@@ -11,6 +11,7 @@ import WagerScreen from './components/WagerScreen'
 import maxBetService from './services/maxBet'
 import correctNotification from "./public/audio/rightanswer.mp3";
 import wrongNotification from "./public/audio/wrong-answer.mp3";
+import EndGame from './components/endGame'
 
 
 function App() {
@@ -36,6 +37,15 @@ function App() {
   const [questionCounter, setQuestionCounter] = useState(0)
   const roundLength = 180;
 
+  const setEndView = useCallback(() => {
+    if (bank > 0) {
+      setView("finalRound")
+    }
+    else {
+      setView("gameOver")
+    }
+  }, [bank])
+
   const nextRound = useCallback(() => {
     if (round === 1) {
       setDailyDouble([[Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)], [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]])
@@ -51,11 +61,12 @@ function App() {
         [true, true, true, true, true],
         [true, true, true, true, true],
       ]);
-
     } else {
-      setView("finalRound")
+    if (round===2){
+      setEndView()
     }
-  },[round])
+    }
+  }, [round, setEndView])
 
 
   useEffect(() => {
@@ -85,6 +96,8 @@ function App() {
     return ()=>clearInterval(countdown);
   })
 
+
+
   const itemClick = (col, row, value) => {
     setColumn(col)
     setRow(row)
@@ -102,9 +115,30 @@ function App() {
     }
   }
 
+  const reset = () => {
+    createBoard(setBoard);
+    async function getWrongAnswers() {
+      setRandomAnswers(await fetchRand());
+    }
+    getWrongAnswers();
+    setRound(1)
+    setHistory([
+      [true, true, true, true, true],
+      [true, true, true, true, true],
+      [true, true, true, true, true],
+      [true, true, true, true, true],
+      [true, true, true, true, true],
+      [true, true, true, true, true],
+    ]);
+  }
 
-
-  const randIdx = Math.floor(Math.random() * 98);
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 
   const correctAnswer = () => {
     document.getElementById("correct-sound").play();
@@ -113,6 +147,7 @@ function App() {
     setTimeout(() => {
       setBank(bank + questionValue);
     }, 500);
+    reduceWrongAnswers()
   };
 
   const wrongAnswer = () => {
@@ -122,9 +157,16 @@ function App() {
     setTimeout(() => {
       setBank(bank - questionValue);
     }, 500);
+    reduceWrongAnswers()
   };
 
-
+  const reduceWrongAnswers = () =>{
+    setRandomAnswers((prevAnswers)=>{
+      prevAnswers.pop()
+      prevAnswers.pop()
+      return [...prevAnswers]
+    })
+  }
 
   const renderMain = () => {
     if (view === "landing") {
@@ -139,17 +181,19 @@ function App() {
         round={round}/>
     )
 
-    if (view === 'question') return (
+    if (view === 'question'){
+      return (
       <QuestionCard
         round={round}
         setView={setView}
         clue={board[round-1][col].clues[row]}
         setQuestionValue={setQuestionValue}
         correctAnswer={correctAnswer}
+        shuffleArray={shuffleArray}
         wrongAnswer={wrongAnswer}
-        randomAnswers={[randomAnswers[randIdx], randomAnswers[randIdx+1]]}
+        randomAnswers={[randomAnswers[randomAnswers.length - 1], randomAnswers[randomAnswers.length-2]]}
       />
-    )
+    )}
     if (view==='dailyDouble') return (
       <AnnouncementPage text="Daily Double!" setView={setView} next='wager'/>
     )
@@ -159,11 +203,21 @@ function App() {
     if (view === 'finalRound') return (
       <AnnouncementPage text="Final Jeopardy" setView={setView} next='wager' time={3} />
     )
-  if (view === 'wager') return (
-    <>
-      <WagerScreen bank={bank} setBank={setBank} round={round} maxBet={maxBet && maxBet} setQuestionValue={setQuestionValue} setView={setView} />
-    </>
-  )
+    if (view === 'wager') return (
+      <>
+        <WagerScreen bank={bank} setBank={setBank} round={round} maxBet={maxBet && maxBet} setQuestionValue={setQuestionValue} setView={setView} />
+      </>
+    )
+    if(view ==="gameOver")return (
+      <>
+        <EndGame mode="fail" setView={setView} reset={reset}/>
+      </>
+    )
+    if (view === "win") return (
+      <>
+        <EndGame setView={setView} score={bank} reset={reset} />
+      </>
+    )
   }
 
 

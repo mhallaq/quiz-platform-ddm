@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 // import Container from '@material-ui/core/Container';
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -46,34 +46,29 @@ const CounterBarContainer = styled.div`
 `;
 
 const QuestionCard = (props) => {
-  const { clue, setView, correctAnswer, wrongAnswer, randomAnswers } = props;
+  const { clue, setView, correctAnswer, wrongAnswer, randomAnswers, shuffleArray } = props;
 
   const classes = useStyles();
 
-  // Durstenfeld shuffle, an optimized version of Fisher-Yates algorithm
-  const shuffleArray = useCallback((array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+  const stripItalics = (stringIn) => {
+    if (stringIn.charAt(0)==='<'){
+      return stringIn.slice(3,stringIn.length-4)
     }
-    return array;
-  }, []);
-
-
-
-  const multipleChoice = [
-    <Button onClick={correctAnswer} variant="contained">
-      <p dangerouslySetInnerHTML={{__html: clue.answer}}/>
+    return stringIn;
+  }
+  // eslint-disable-next-line
+  const [answers, setAnswers] = React.useState(shuffleArray([
+    <Button key={1} onClick={correctAnswer} variant="contained">
+      <h3>{stripItalics(clue.answer)}</h3>
     </Button>,
-    <Button onClick={wrongAnswer} variant="contained">
-      <p dangerouslySetInnerHTML={{ __html: randomAnswers[0] }}/>
+    <Button key={2} onClick={wrongAnswer} variant="contained">
+      <h3>{stripItalics(randomAnswers[0])}</h3>
     </Button>,
-    <Button onClick={wrongAnswer} variant="contained">
-      <p dangerouslySetInnerHTML={{ __html: randomAnswers[1] }}/>
+    <Button key={3} onClick={wrongAnswer} variant="contained">
+      <h3>{stripItalics(randomAnswers[1])}</h3>
     </Button>,
-  ];
-
-
+  ])
+)
 
   return (
     <Box className={classes.main}>
@@ -96,7 +91,7 @@ const QuestionCard = (props) => {
         }}
       >
 
-        {shuffleArray(multipleChoice)}
+        {answers}
       </div>
     </Box>
   );
