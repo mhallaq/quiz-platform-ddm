@@ -35,7 +35,9 @@ function App() {
   const [roundTimer, setRoundTimer] = useState(-1)
   const [maxBet, setMaxBet] = useState(0);
   const [questionCounter, setQuestionCounter] = useState(0)
-  const roundLength = 180;
+  const roundLength = 60;
+
+  console.log(roundTimer)
 
   const setEndView = useCallback(() => {
     if (bank > 0) {
@@ -195,7 +197,7 @@ function App() {
 
     if (view === 'question'){
       return (
-      <QuestionCard
+        <QuestionCard
         round={round}
         setView={setView}
         clue={board[round-1][col].clues[row]}
