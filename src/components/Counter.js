@@ -17,7 +17,7 @@ const Thumb = styled.div`
 `;
 
 const Counter = (props) => {
-  const { setView, wrongAnswer } = props ;
+  const { setView, wrongAnswer, round } = props ;
   //Seconds Counter
   const [counter, setCounter] = React.useState(11); // counter is 11 seconds
   const [percentage, setPercentage] = React.useState(0);
@@ -40,9 +40,11 @@ const Counter = (props) => {
   // console.log(counter);
 
   React.useEffect(() => {
-    if (counter <= 0) {
-      setView("grid");
+    if (counter <= 0 && round === 3) {
+      // setView("gameOver");
       wrongAnswer();
+    } else if (counter <= 0) {
+      setView("grid");
     }
     const timer =
       counter > 0 &&

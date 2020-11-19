@@ -52,7 +52,7 @@ const CounterBarContainer = styled.div`
 `;
 
 const QuestionCard = (props) => {
-  const { clue, correctAnswer, wrongAnswer, randomAnswers, shuffleArray, setView } = props;
+  const { clue, correctAnswer, wrongAnswer, randomAnswers, shuffleArray, setView, round} = props;
   const classes = useStyles();
 
 
@@ -74,7 +74,7 @@ const QuestionCard = (props) => {
     <Box className={classes.main}>
       <Box className={classes.countdown}>
         <CounterBarContainer>
-          <Counter wrongAnswer={wrongAnswer} setView={setView}/>
+          <Counter wrongAnswer={wrongAnswer} setView={setView} round={round}/>
         </CounterBarContainer>
       </Box>
       <Box className={`${classes.question}`}>

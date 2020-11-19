@@ -18,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
     "-webkit-text-stroke": "1px black",
     fontWeight: "900",
   },
-  full:{
-    height:"80vh"
+  full: {
+    height: "80vh"
   },
   statement: {
     width: "80%",
-    margin:'auto'
+    margin: 'auto'
   },
   button: {
     fontFamily: 'Swiss911',
@@ -45,20 +45,22 @@ const EndCard = (props) => {
 
   const classes = useStyles();
 
-  const renderEndText = () =>{
+  const renderEndText = () => {
     if (mode === "fail") {
       return (
-      <>
-        <h1>Game Over</h1>
-        <h2>You weren't able to maintain a positive score at the end of the Double Jeopardy.</h2>
-      </>
+        <>
+          <h1>Game Over</h1>
+          <h2>You weren't able to maintain a positive score</h2>
+          <h2>1. You must have a positive score to participate in Final Jeopardy.</h2>
+          <h2>2. You must have a positive score to win.</h2>
+        </>
       )
-    } else{
+    } else {
       return (
-      <>
-        <h2>Congratulations!</h2>
-      <h3>You completed Jeopardy with a score of {score}.</h3>
-      </>
+        <>
+          <h2>Congratulations!</h2>
+          <h3>You completed Jeopardy with a score of {score}.</h3>
+        </>
       )
     }
   }
@@ -69,7 +71,7 @@ const EndCard = (props) => {
       <Box className={`${classes.statement} ${classes.main}`}>
         {renderEndText()}
         <Button className={classes.button}
-          onClick={() => { setView('landing'); reset()}}
+          onClick={() => { setView('landing'); reset() }}
         >
           <h2>Play Again?</h2>
         </Button>
