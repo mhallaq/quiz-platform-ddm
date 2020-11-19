@@ -62,7 +62,7 @@ const QuestionCard = (props) => {
       <h3 dangerouslySetInnerHTML={{__html: clue.answer}}/>
     </Button>,
     <Button key={2} onClick={wrongAnswer} variant="contained">
-      <h3 dangerouslySetInnerHTML={{__html: randomAnswers[0]}}/>
+      <h3 dangerouslySetInnerHTML={{__html: randomAnswers && randomAnswers[0]}}/>
     </Button>,
     <Button key={3} onClick={wrongAnswer} variant="contained">
       <h3 dangerouslySetInnerHTML={{__html: randomAnswers[1]}}/>
