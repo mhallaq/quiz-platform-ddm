@@ -90,7 +90,7 @@ function App() {
       setRandomAnswers(await fetchRand());
     }
     getWrongAnswers();
-  }, []);
+  }, [boardOffset]);
 
   useEffect(()=>{
     const countdown = setInterval(()=>{

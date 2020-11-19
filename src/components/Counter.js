@@ -20,7 +20,7 @@ const Counter = (props) => {
   const { setView, wrongAnswer, round } = props ;
   //Seconds Counter
   const [counter, setCounter] = React.useState(11); // counter is 11 seconds
-  const [percentage, setPercentage] = React.useState(0);
+  // const [percentage, setPercentage] = React.useState(0);
 
   const thumbs = React.useMemo(
     () => [
@@ -52,7 +52,7 @@ const Counter = (props) => {
       }, 2000);
 
     return () => clearInterval(timer);
-  }, [counter, thumbs]);
+  }, [counter, thumbs, round, setView, wrongAnswer]);
 
   return (
     <>

@@ -99,7 +99,7 @@ export default function WagerScreen(props) {
                     <Button
                         fullWidth={true}
                         variant="contained"
-                        onClick={(e) => handleSubmit(e)} variant="contained"
+                        onClick={(e) => handleSubmit(e)}
                         style={{ color: 'yellow', backgroundColor: '#060CE9' }}
                     >Submit
                     </Button>
