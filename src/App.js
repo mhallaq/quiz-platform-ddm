@@ -33,12 +33,11 @@ function App() {
   const [randomAnswers, setRandomAnswers] = useState()
   const [roundTimer, setRoundTimer] = useState(-1)
   const [maxBet, setMaxBet] = useState(0);
-
-
-
-
-
-
+  const [shuffledOrder, setShuffledOrder] = useState([0,1,2])
+  console.log('round timer: '+ roundTimer)
+  console.log('round: '+ round)
+  console.log('view :' + view)
+  
   useEffect(() => {
     createBoard(setBoard);
     async function getWrongAnswers() {
@@ -53,7 +52,7 @@ function App() {
         if (round === 1) {
           setDailyDouble([[Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)], [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]])
           setView("secondRound")
-          setRoundTimer(180)//time second round
+          setRoundTimer(18)//time second round
           setRound(round + 1)
           setHistory([
             [true, true, true, true, true],
@@ -66,6 +65,7 @@ function App() {
 
         } else {
           setView("finalRound")
+          setRound(3)
         }
 
       }
@@ -77,7 +77,8 @@ function App() {
 
     },1000)
     return ()=>clearInterval(countdown);
-  })
+  }, [round, setDailyDouble, setView, setRound, setHistory, roundTimer, setRoundTimer, shuffledOrder, setShuffledOrder])
+  
 
   const itemClick = (col, row, value) => {
     setColumn(col)
@@ -93,6 +94,7 @@ function App() {
       setView('dailyDouble')
     }else{
       setView('question')
+      setShuffledOrder(shuffleArray([0,1,2]))
     }
   }
 
@@ -116,11 +118,19 @@ function App() {
     }, 500);
   };
 
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
 
 
   const renderMain = () => {
     if (view === "landing") {
-      return <LandingPage setView={setView} start={() => setRoundTimer(180)}/>;
+      return <LandingPage setView={setView} start={() => setRoundTimer(18)}/>;
     }
 
     if (view === 'grid') return (
@@ -139,7 +149,8 @@ function App() {
         setQuestionValue={setQuestionValue}
         correctAnswer={correctAnswer}
         wrongAnswer={wrongAnswer}
-        randomAnswers={[randomAnswers[randIdx], randomAnswers[randIdx+1]]}
+        randomAnswers={[randomAnswers[randIdx], randomAnswers[randIdx + 1]]}
+        shuffledOrder={shuffledOrder}
       />
     )
     if (view==='dailyDouble') return (

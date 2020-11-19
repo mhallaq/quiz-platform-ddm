@@ -32,7 +32,7 @@ const Counter = (props) => {
     <Thumb />,
   ],[])
 
-  console.log(counter)
+  // console.log(counter)
 
   React.useEffect(() => {
     if (counter <= 0) {

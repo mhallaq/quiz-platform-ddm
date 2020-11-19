@@ -51,12 +51,8 @@ export default function WagerScreen(props) {
                     <h1>Enter your wager</h1>
                     <div>
                         <FormControl fullWidth className={classes.margin} variant="outlined">
-                            {/* <InputLabel htmlFor="outlined-adornment-amount">TYPE YOUR WAGER</InputLabel> */}
                             <OutlinedInput
-                                // color='secondary'
                                 error={betValue > maxBet ? true : false}
-                                helperText="Wager must not exceed total bank value. Only numbers allowed."
-                                // id="outlined-adornment-amount"
                                 value={betValue}
                                 onChange={handleChange()}
                                 startAdornment={<InputAdornment position="start">$</InputAdornment>}
