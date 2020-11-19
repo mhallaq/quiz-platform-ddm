@@ -19,8 +19,9 @@ const Thumb = styled.div`
 const Counter = (props) => {
   const { setView, wrongAnswer, round } = props ;
   //Seconds Counter
-  const [counter, setCounter] = React.useState(11); // counter is 11 seconds
+  const [counter, setCounter] = React.useState(10); // counter is 11 seconds
   // const [percentage, setPercentage] = React.useState(0);
+  console.log(counter)
 
   const thumbs = React.useMemo(
     () => [
@@ -49,7 +50,7 @@ const Counter = (props) => {
       setInterval(() => {
         setCounter(counter - 2);
         thumbs.splice(0, 2);
-      }, 2000);
+      }, 1000);
 
     return () => clearInterval(timer);
   }, [counter, thumbs, round, setView, wrongAnswer]);
