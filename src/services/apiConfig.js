@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const URL = "https://jservice.io/api/"
 
-const CATEGORIES_URL = URL + "categories?count=12&offset=" + Math.random() * 1000
+const CATEGORIES_URL = URL + "categories?count=13&offset=" + Math.random() * 1000
 const CLUES_URL = URL + "clues?category="
 const RAND_URL = URL + "random?count=100"
 
