@@ -66,6 +66,8 @@ const EndCard = (props) => {
   }
 
 
+
+
   return (
     <Box className={`${classes.full} ${classes.main}`}>
       <Box className={`${classes.statement} ${classes.main}`}>

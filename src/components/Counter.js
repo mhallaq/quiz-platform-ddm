@@ -37,8 +37,6 @@ const Counter = (props) => {
     []
   );
 
-  // console.log(counter);
-
   React.useEffect(() => {
     if (counter <= 0 && round === 3) {
       // setView("gameOver");

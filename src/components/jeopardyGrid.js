@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     backgroundColor: "#060CE9",
     "-webkit-text-stroke": ".5px black",
+    '&:hover': {
+       background: "#090DA0",
+    },
   },
   title: {
     color: "#FFFFFF",
@@ -32,7 +35,7 @@ export default function JeopardyGrid(props) {
   const { board, itemClick, round } = props || [];
   const classes = useStyles();
   return (
-    <Grid container direction="row" className={classes.main}>
+    <Grid container direction="row" className={`classes.main`}>
       {board &&
         board[round-1].map((column, index) => {
           const notTaken = props.history[index];
