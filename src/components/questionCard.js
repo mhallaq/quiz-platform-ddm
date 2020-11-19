@@ -50,23 +50,25 @@ const QuestionCard = (props) => {
 
   const classes = useStyles();
 
+  const stripItalics = (stringIn) => {
+    if (stringIn.charAt(0)==='<'){
+      return stringIn.slice(3,stringIn.length-4)
+    }
+    return stringIn;
+  }
+  // eslint-disable-next-line
   const [answers, setAnswers] = React.useState(shuffleArray([
     <Button key={1} onClick={correctAnswer} variant="contained">
-      <h3>{clue.answer}</h3>
+      <h3>{stripItalics(clue.answer)}</h3>
     </Button>,
     <Button key={2} onClick={wrongAnswer} variant="contained">
-      <h3>{randomAnswers[0]}</h3>
+      <h3>{stripItalics(randomAnswers[0])}</h3>
     </Button>,
     <Button key={3} onClick={wrongAnswer} variant="contained">
-      <h3>{randomAnswers[1]}</h3>
+      <h3>{stripItalics(randomAnswers[1])}</h3>
     </Button>,
   ])
 )
-  // Durstenfeld shuffle, an optimized version of Fisher-Yates algorithm
-
-
-  //setAnswers(shuffleArray(answers));
-
 
   return (
     <Box className={classes.main}>

@@ -37,6 +37,15 @@ function App() {
   const [questionCounter, setQuestionCounter] = useState(0)
   const roundLength = 180;
 
+  const setEndView = useCallback(() => {
+    if (bank > 0) {
+      setView("finalRound")
+    }
+    else {
+      setView("gameOver")
+    }
+  }, [bank])
+
   const nextRound = useCallback(() => {
     if (round === 1) {
       setDailyDouble([[Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)], [Math.floor(Math.random() * 6), Math.floor(Math.random() * 5)]])
@@ -52,16 +61,12 @@ function App() {
         [true, true, true, true, true],
         [true, true, true, true, true],
       ]);
-
     } else {
-      if(bank>0){
-        setView("finalRound")
-      }
-      else{
-        setView("gameOver")
-      }
+    if (round===2){
+      setEndView()
     }
-  },[round])
+    }
+  }, [round, setEndView,bank])
 
 
   useEffect(() => {
@@ -90,6 +95,8 @@ function App() {
     },1000)
     return ()=>clearInterval(countdown);
   })
+
+
 
   const itemClick = (col, row, value) => {
     setColumn(col)
@@ -203,12 +210,12 @@ function App() {
     )
     if(view ==="gameOver")return (
       <>
-        <EndGame mode="fail" setView={setView}/>
+        <EndGame mode="fail" setView={setView} reset={reset}/>
       </>
     )
     if (view === "win") return (
       <>
-        <EndGame setView={setView} score={bank} />
+        <EndGame setView={setView} score={bank} reset={reset} />
       </>
     )
   }

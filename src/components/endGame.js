@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const EndCard = (props) => {
-  const { mode, score, setView } = props;
+  const { mode, score, setView, reset } = props;
 
   const classes = useStyles();
 
@@ -68,7 +68,7 @@ const EndCard = (props) => {
       <Box className={`${classes.statement} ${classes.main}`}>
         {renderEndText()}
         <Button className={classes.button}
-          onClick={() => { setView('landing'); }}
+          onClick={() => { setView('landing'); reset()}}
         >
           <h2>Play Again?</h2>
         </Button>
