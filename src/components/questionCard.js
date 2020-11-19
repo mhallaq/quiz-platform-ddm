@@ -53,25 +53,19 @@ const useStyles = makeStyles((theme) => ({
 
 const QuestionCard = (props) => {
   const { clue, correctAnswer, wrongAnswer, randomAnswers, shuffleArray } = props;
-
   const classes = useStyles();
 
-  const stripItalics = (stringIn) => {
-    if (stringIn.charAt(0)==='<'){
-      return stringIn.slice(3,stringIn.length-4)
-    }
-    return stringIn;
-  }
+
   // eslint-disable-next-line
   const [answers, setAnswers] = React.useState(shuffleArray([
     <Button key={1} onClick={correctAnswer} variant="contained">
-      <h3>{stripItalics(clue.answer)}</h3>
+      <h3 dangerouslySetInnerHTML={{__html: clue.answer}}/>
     </Button>,
     <Button key={2} onClick={wrongAnswer} variant="contained">
-      <h3>{stripItalics(randomAnswers[0])}</h3>
+      <h3 dangerouslySetInnerHTML={{__html: randomAnswers[0]}}/>
     </Button>,
     <Button key={3} onClick={wrongAnswer} variant="contained">
-      <h3>{stripItalics(randomAnswers[1])}</h3>
+      <h3 dangerouslySetInnerHTML={{__html: randomAnswers[1]}}/>
     </Button>,
   ])
 )
