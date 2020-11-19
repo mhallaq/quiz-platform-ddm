@@ -11,11 +11,12 @@ import WagerScreen from './components/WagerScreen'
 import maxBetService from './services/maxBet'
 import correctNotification from "./public/audio/rightanswer.mp3";
 import wrongNotification from "./public/audio/wrong-answer.mp3";
+import EndGame from './components/endGame'
 
 
 function App() {
   const [board, setBoard] = useState()
-  const [view, setView] = useState('landing')
+  const [view, setView] = useState('gameOver')
   const [round, setRound] = useState(1)
   const [col, setColumn] = useState()
   const [row, setRow] = useState()
@@ -53,7 +54,12 @@ function App() {
       ]);
 
     } else {
-      setView("finalRound")
+      if(bank>0){
+        setView("finalRound")
+      }
+      else{
+        setView("gameOver")
+      }
     }
   },[round])
 
@@ -159,11 +165,21 @@ function App() {
     if (view === 'finalRound') return (
       <AnnouncementPage text="Final Jeopardy" setView={setView} next='wager' time={3} />
     )
-  if (view === 'wager') return (
-    <>
-      <WagerScreen bank={bank} setBank={setBank} round={round} maxBet={maxBet && maxBet} setQuestionValue={setQuestionValue} setView={setView} />
-    </>
-  )
+    if (view === 'wager') return (
+      <>
+        <WagerScreen bank={bank} setBank={setBank} round={round} maxBet={maxBet && maxBet} setQuestionValue={setQuestionValue} setView={setView} />
+      </>
+    )
+    if(view=="gameOver")return (
+      <>
+        <EndGame mode="fail" setView={setView}/>
+      </>
+    )
+    if (view == "win") return (
+      <>
+        <EndGame setView={setView} score={bank} />
+      </>
+    )
   }
 
 
