@@ -1,7 +1,7 @@
 import { fetchCategories, fetchClues } from './apiConfig'
 
-const createBoard = async (setBoard) => {
-    const randomCategories = await fetchCategories()
+const createBoard = async (setBoard, offset) => {
+    const randomCategories = await fetchCategories(offset)
     const categories = randomCategories.map(async category => {
 
         const clues =[]

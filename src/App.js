@@ -16,6 +16,7 @@ import EndGame from './components/endGame'
 
 function App() {
   const [board, setBoard] = useState()
+  const [boardOffset, setBoardOffset] = useState(1)
   const [view, setView] = useState('gameOver')
   const [round, setRound] = useState(1)
   const [col, setColumn] = useState()
@@ -37,7 +38,6 @@ function App() {
   const [questionCounter, setQuestionCounter] = useState(0)
   const roundLength = 6;
 
-  console.log(roundTimer)
 
   const setEndView = useCallback(() => {
     if (bank > 0) {
@@ -85,7 +85,7 @@ function App() {
   },[questionCounter, nextRound]);
 
   useEffect(() => {
-    createBoard(setBoard);
+    createBoard(setBoard, boardOffset);
     async function getWrongAnswers() {
       setRandomAnswers(await fetchRand());
     }
@@ -125,7 +125,8 @@ function App() {
   }
 
   const reset = () => {
-    createBoard(setBoard);
+    setBoardOffset(boardOffset + 13)
+    createBoard(setBoard, boardOffset + 13);
     async function getWrongAnswers() {
       setRandomAnswers(await fetchRand());
     }

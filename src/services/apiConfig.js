@@ -2,15 +2,15 @@ import axios from 'axios'
 
 const URL = "https://jservice.io/api/"
 
-const CATEGORIES_URL = URL + "categories?count=13&offset=" + Math.random() * 1000
+const CATEGORIES_URL = URL + "categories?count=13&offset="
 const CLUES_URL = URL + "clues?category="
 const RAND_URL = URL + "random?count=100"
 
 
 
-export const fetchCategories = async () => {
+export const fetchCategories = async (offset) => {
     try {
-        const response = await axios.get(CATEGORIES_URL)
+        const response = await axios.get(CATEGORIES_URL + offset)
         return response.data
     } catch (error) {
         throw error
