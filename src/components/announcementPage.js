@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   main: {
-    // marginTop: '8vh',
     fontFamily: 'KorinnaBold',
     alignItems: 'center',
     justifyContent: "center",

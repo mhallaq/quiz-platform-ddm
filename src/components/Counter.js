@@ -2,13 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 const Track = styled.div`
-  height: 20px;
+  height: 2rem;
   margin: 0 auto;
   background-color: #e0e0e0;
+  display: flex;
+  justifyContent: end;
+  width: 100%;
 `;
 
 const Thumb = styled.div`
-  width: ${100 / 9}%;
+  width: ${100 / 12}%;
   height: 100%;
   background-color: #cc1414;
   transition: width 0.3s ease-in;
@@ -17,48 +20,46 @@ const Thumb = styled.div`
 `;
 
 const Counter = (props) => {
-  const { setView, wrongAnswer, round } = props ;
+  const { setView, wrongAnswer, round } = props;
   //Seconds Counter
   const [counter, setCounter] = React.useState(10); // counter is 11 seconds
-  // const [percentage, setPercentage] = React.useState(0);
-  console.log(counter)
 
-  const thumbs = React.useMemo(
-    () => [
-      <Thumb />,
-      <Thumb />,
-      <Thumb />,
-      <Thumb />,
-      <Thumb />,
-      <Thumb />,
-      <Thumb />,
-      <Thumb />,
-      <Thumb />,
-    ],
-    []
+
+  const [thumbs, setThumbs] = React.useState(
+    [
+      <Thumb key={0} />,
+      <Thumb key={1} />,
+      <Thumb key={2} />,
+      <Thumb key={3} />,
+      <Thumb key={4} />,
+      <Thumb key={5} />,
+      <Thumb key={6} />,
+      <Thumb key={7} />,
+      <Thumb key={8} />,
+      <Thumb key={9} />,
+    ]
   );
 
   React.useEffect(() => {
     if (counter <= 0 && round === 3) {
-      // setView("gameOver");
       wrongAnswer();
     } else if (counter <= 0) {
       setView("grid");
     }
-    const timer =
-      counter > 0 &&
-      setInterval(() => {
-        setCounter(counter - 2);
-        thumbs.splice(0, 2);
-      }, 1000);
+  }, [counter, round, setView, wrongAnswer])
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCounter(counter - 1);
+      setThumbs(thumbs.slice(0, thumbs.length - 1));
+    }, 1000);
 
     return () => clearInterval(timer);
-  }, [counter, thumbs, round, setView, wrongAnswer]);
+  });
 
   return (
     <>
       <Track
-        style={{ display: "flex", justifyContent: "center", height: "2rem" }}
       >
         {thumbs}
       </Track>

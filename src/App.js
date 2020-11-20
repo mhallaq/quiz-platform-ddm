@@ -13,7 +13,6 @@ import correctNotification from "./public/audio/rightanswer.mp3";
 import wrongNotification from "./public/audio/wrong-answer.mp3";
 import EndGame from './components/endGame'
 
-
 function App() {
   const [board, setBoard] = useState()
   const [boardOffset, setBoardOffset] = useState(1)
@@ -36,7 +35,7 @@ function App() {
   const [roundTimer, setRoundTimer] = useState(-1)
   const [maxBet, setMaxBet] = useState(0);
   const [questionCounter, setQuestionCounter] = useState(0)
-  const roundLength = 30;
+  const roundLength = 160;
 
 
   const setEndView = useCallback(() => {
