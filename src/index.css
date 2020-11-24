@@ -52,7 +52,14 @@ code {
   font-style: normal;
 }
 
-
+.alex-background {
+  background-image: url('https://media4.s-nbcnews.com/i/newscms/2020_47/1639219/alex-trebek-sk-main-201119_d1ddedd3ffeddedc92ea6db479a68c33.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  height: 100vh;
+  background-size: cover;
+}
 .gradient-background {
     background: linear-gradient(149deg, #8a2be2, #9400d3, #daa520, #ff00bd);
     background-size: 800% 800%;

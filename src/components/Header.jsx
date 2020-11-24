@@ -6,7 +6,7 @@ export default function Header(props) {
     return (
         <div className='header'>
             <h2 className='logo'>JEOPARDY! FAN EDITION</h2>
-            <h2 className='logo' style={{ paddingRight: '10px' }}>SCORE: <span style={{ color: `${balanceColor}`}}>${bank}</span></h2>
+            <h2  style={{ paddingRight: '10px', fontFamily: 'Swiss 911' }}>SCORE: <span style={{ color: `${balanceColor}`}}>${bank}</span></h2>
 
         </div>
     )

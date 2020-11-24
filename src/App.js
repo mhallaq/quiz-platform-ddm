@@ -1,4 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
 import JeopardyGrid from "./components/jeopardyGrid";
 import "./App.css";
 import createBoard from './services/createBoard'
@@ -71,18 +76,18 @@ function App() {
       }
       getWrongAnswers()
     } else {
-    if (round===2){
-      setEndView()
-    }
+      if (round === 2) {
+        setEndView()
+      }
     }
   }, [round, setEndView])
 
 
   useEffect(() => {
-    if(questionCounter===30){
+    if (questionCounter === 30) {
       nextRound()
     }
-  },[questionCounter, nextRound]);
+  }, [questionCounter, nextRound]);
 
   useEffect(() => {
     createBoard(setBoard, boardOffset);
@@ -92,17 +97,17 @@ function App() {
     getWrongAnswers();
   }, [boardOffset]);
 
-  useEffect(()=>{
-    const countdown = setInterval(()=>{
+  useEffect(() => {
+    const countdown = setInterval(() => {
 
 
-      setRoundTimer(roundTimer-1)
-      if(roundTimer===0){
+      setRoundTimer(roundTimer - 1)
+      if (roundTimer === 0) {
         nextRound();
       }
 
-    },1000)
-    return ()=>clearInterval(countdown);
+    }, 1000)
+    return () => clearInterval(countdown);
   })
 
 
@@ -117,9 +122,9 @@ function App() {
       prevHistory[col][row] = false;
       return [...prevHistory];
     })
-    if ((round !== 3 && col === dailyDouble[0][0] && row === dailyDouble[0][1]) || (round === 2 && col === dailyDouble[1][0] && row === dailyDouble[1][1])){
+    if ((round !== 3 && col === dailyDouble[0][0] && row === dailyDouble[0][1]) || (round === 2 && col === dailyDouble[1][0] && row === dailyDouble[1][1])) {
       setView('dailyDouble')
-    }else{
+    } else {
       setView('question')
     }
   }
@@ -158,82 +163,52 @@ function App() {
       setBank(bank + questionValue);
     }, 500);
     reduceWrongAnswers()
-    if (round===3){
-      setView('win')
-    }else{
-      setView('grid')
-    }
-  };
-
-  const wrongAnswer = () => {
-    document.getElementById("wrong-sound").play();
-    setQuestionCounter(questionCounter+1)
-    setTimeout(() => {
-      setBank(bank - questionValue);
-    }, 500);
-    reduceWrongAnswers()
-    if (round === 3 && bank - questionValue <= 0) {
-      setView('gameOver')
-    } else if(round === 3) {
+    if (round === 3) {
       setView('win')
     } else {
       setView('grid')
     }
   };
 
-  const reduceWrongAnswers = () =>{
-    setRandomAnswers((prevAnswers)=>{
+  const wrongAnswer = () => {
+    document.getElementById("wrong-sound").play();
+    setQuestionCounter(questionCounter + 1)
+    setTimeout(() => {
+      setBank(bank - questionValue);
+    }, 500);
+    reduceWrongAnswers()
+    if (round === 3 && bank - questionValue <= 0) {
+      setView('gameOver')
+    } else if (round === 3) {
+      setView('win')
+    } else {
+      setView('grid')
+    }
+  };
+
+  const reduceWrongAnswers = () => {
+    setRandomAnswers((prevAnswers) => {
       prevAnswers.pop()
       return [...prevAnswers]
     })
   }
 
   const renderMain = () => {
-    if (view === "landing") {
-      return <LandingPage setView={setView} start={() => setRoundTimer(roundLength)}/>;
-    }
 
-    if (view === 'grid') return (
-      <JeopardyGrid
-        board={board}
-        itemClick={itemClick}
-        history={history}
-        round={round}/>
-    )
 
-    if (view === 'question'){
-      return (
-        <QuestionCard
-        round={round}
-        setView={setView}
-        clue={board[round-1][col].clues[row]}
-        setQuestionValue={setQuestionValue}
-        correctAnswer={correctAnswer}
-        shuffleArray={shuffleArray}
-        wrongAnswer={wrongAnswer}
-        randomAnswers={[randomAnswers[randomAnswers.length - 1], randomAnswers[randomAnswers.length-2]]}
-      />
-    )}
-    if (view==='dailyDouble') return (
-      <AnnouncementPage text="Daily Double!" setView={setView} next='wager' time={2}/>
-    )
-    if (view === 'secondRound') return (
-      <AnnouncementPage text="Double Jeopardy!" setView={setView} next='grid' time={2} />
-    )
-    if (view === 'finalRound') return (
-      <AnnouncementPage text="Final Jeopardy" setView={setView} next='finalRoundCategory' time={2} />
-    )
-    if (view === 'finalRoundCategory') return (
-      <AnnouncementPage text={`Category: ${board[2][0].title}`} setView={setView} next='wager' time={3} />
-    )
+
+
+   
+  
+  
     if (view === 'wager') return (
       <>
         <WagerScreen bank={bank} setBank={setBank} round={round} maxBet={maxBet && maxBet} setQuestionValue={setQuestionValue} setView={setView} />
       </>
     )
-    if(view ==="gameOver") return (
+    if (view === "gameOver") return (
       <>
-        <EndGame mode="fail" setView={setView} reset={reset}/>
+        <EndGame mode="fail" setView={setView} reset={reset} />
       </>
     )
     if (view === "win") return (
@@ -248,7 +223,7 @@ function App() {
   return (
     <div className="App ">
       <div
-        className="gradient-background"
+        className="alex-background"
         style={{
           display: "flex",
           flexFlow: "column nowrap",
@@ -259,8 +234,132 @@ function App() {
           <audio id="correct-sound" src={correctNotification}></audio>
           <audio id="wrong-sound" src={wrongNotification}></audio>
         </>
-        <Header bank={bank} setBank={setBank} />
+        {view === "landing" ? '' : <Header bank={bank} setBank={setBank} />}
         {renderMain()}
+
+
+        <Router>
+          <Switch>
+            <Route
+              exact path="/"
+              render={() =>
+                <LandingPage
+                  setView={setView}
+                  start={() => setRoundTimer(roundLength)}
+                />
+              }
+            />
+            <Route
+              exact path="/grid"
+              render={() =>
+                <JeopardyGrid
+                  board={board}
+                  itemClick={itemClick}
+                  history={history}
+                  round={round}
+                />
+              }
+            />
+            <Route
+              exact path="/question"
+              render={() =>
+                <QuestionCard
+                  round={round}
+                  setView={setView}
+                  clue={board[round - 1][col].clues[row]}
+                  setQuestionValue={setQuestionValue}
+                  correctAnswer={correctAnswer}
+                  shuffleArray={shuffleArray}
+                  wrongAnswer={wrongAnswer}
+                  randomAnswers={[
+                    randomAnswers[randomAnswers.length - 1],
+                    randomAnswers[randomAnswers.length - 2]
+                  ]}
+                />
+              }
+            />
+            <Route
+              exact path="/dailyDouble"
+              render={() =>
+                <AnnouncementPage
+                  time={2}
+                  text="Daily Double!"
+                  next='wager'
+                  setView={setView} 
+                />
+              }
+            />
+            <Route
+              exact path="/secondRound"
+              render={() =>
+                <AnnouncementPage
+                  time={2}
+                  text="Double Jeopardy!"
+                  next='grid'
+                  setView={setView} 
+                />
+              }
+            />
+            <Route
+              exact path="/finalRound"
+              render={() =>
+                <AnnouncementPage
+                  time={2}
+                  text="Final Jeopardy"
+                  next='finalRoundCategory'
+                  setView={setView} 
+                />
+              }
+            />
+            <Route
+              exact path="/finalRoundCategory"
+              render={() =>
+                <AnnouncementPage
+                  time={3}
+                  text={`Category: ${board[2][0].title}`}
+                  next='wager'
+                  setView={setView}
+                />
+              }
+            />
+            <Route
+              exact path="/wager"
+              render={() =>
+                <WagerScreen
+                  round={round}
+                  bank={bank}
+                  setBank={setBank}
+                  maxBet={maxBet}
+                  setView={setView}
+                  setQuestionValue={setQuestionValue}
+                />
+              }
+            />
+            <Route
+              exact path="/gameOver"
+              render={() =>
+                <EndGame
+                  mode="fail"
+                  reset={reset}
+                  setView={setView}
+                />
+              }
+            />
+            <Route
+              exact path="/gameOver"
+              render={() =>
+                <EndGame
+                  score={bank}
+                  reset={reset}
+                  setView={setView}
+                />
+              }
+            />
+          </Switch>
+        </Router>
+
+
+
       </div>
     </div>
   );
